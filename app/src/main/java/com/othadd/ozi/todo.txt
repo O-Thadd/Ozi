@@ -1,0 +1,28 @@
+DONE. improve endpoints structure. client and backend
+
+DONE. reimplement dialog mechanism.
+    game prompt should not popup unless requester's chat opened.
+    when prompt dialog popped, must dismiss and only through dialog button.
+
+there should be a viewmodel field holding value for current destination. all destination should set this value appropriately when they resume.
+
+collapse gameRequestMessageType and gameRequestResponseMessageType to the new gameManagerMessageType
+
+DONE. remove autodecline. implement 'missed request' instead
+
+DONE. char limit on username
+do not begin user search until atleast 3 characters are provided. by extension do not allow less than 3-character usernames during signUP
+
+credit art owners on playstore
+- <a href="https://www.freepik.com/free-vector/mistery-box-concept-illustration_24487830.htm#query=empty&position=16&from_view=search&track=sph">Image by storyset</a> on Freepik
+- <a href="https://www.freepik.com/free-vector/blank-landscape-scene-nature-park-sunset-time_18755621.htm#page=2&query=village&position=0&from_view=search&track=sph">Image by brgfx</a> on Freepik
+
+DONE. add constraints to workers
+
+DONE. implement log out feature
+
+DONE. type for keyboard. sentence capitalization
+
+FIXED. bug. first chat doesn't show reactively.
+
+DONE. try-catch for all network calls

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Ozi Compose</string>
+
+<!--    <string name="confirm_send_game_request">Send Game request to %1s ?</string>-->
+<!--    <string name="game_request_response_countdown">Game request has been sent.\n%1s has %2ds to respond.</string>-->
+<!--    <string name="game_request_no_response">%1s did not respond to your request</string>-->
+<!--    <string name="game_request_response_user_already_playing">%1s is currently playing.\nYou may send another request later.</string>-->
+<!--    <string name="game_request_response_user_has_pending">%1s currently has a pending request.\nYou may send another request later.</string>-->
+<!--    <string name="game_request_sending_game_request">Sending game request…</string>-->
+<!--    <string name="new_game_request">%1s has challenged you to fastest fingers!</string>-->
+<!--    <string name="new_game_request_countdown">%1s has challenged you to fastest fingers!\nChallenge will be auto-declined in %2ds</string>-->
+<!--    <string name="game_request_accepted">%1s has accepted your challenge.\nGame will begin shortly…</string>-->
+<!--    <string name="game_request_declined">Your game challenge was declined</string>-->
+<!--    <string name="game_request_auto_declined">Game challenge has been auto-declined</string>-->
+<!--    <string name="new_message_notification_channel_id">New Message Notification Channel ID</string>-->
+<!--    <string name="hello_blank_fragment">Hello blank fragment</string>-->
+</resources>
