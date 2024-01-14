@@ -14,7 +14,7 @@ class AppStateUseCases @Inject constructor(
 ) {
 
     suspend fun incrementAppStartsCount() {
-        appStateRepo.incrementAppStartsCount()
+        appStateRepo.incrementAppStartCount()
     }
 
     fun getFlow(): Flow<AppState> {

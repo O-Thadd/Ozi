@@ -1,5 +1,6 @@
 package com.othadd.ozi.data.repos
 
+import com.othadd.ozi.data.dataSources.localStore.DefaultOziDataStore
 import com.othadd.ozi.data.dataSources.localStore.OziDataStore
 import com.othadd.ozi.data.dataSources.remote.OziRemoteService
 import com.othadd.ozi.domain.repos.SignalRepo

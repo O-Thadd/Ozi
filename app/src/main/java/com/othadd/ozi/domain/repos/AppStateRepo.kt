@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AppStateRepo {
 
-    suspend fun incrementAppStartsCount()
+    suspend fun incrementAppStartCount()
 
     fun get(): Flow<AppState>
 

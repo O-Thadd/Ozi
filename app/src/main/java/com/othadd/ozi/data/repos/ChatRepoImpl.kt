@@ -1,6 +1,7 @@
 package com.othadd.ozi.data.repos
 
 import com.othadd.ozi.data.dataSources.database.daos.ChatDao
+import com.othadd.ozi.data.dataSources.localStore.DefaultOziDataStore
 import com.othadd.ozi.data.dataSources.localStore.OziDataStore
 import com.othadd.ozi.data.dataSources.remote.OziRemoteService
 import com.othadd.ozi.domain.model.chat.Chat
@@ -15,8 +16,7 @@ class ChatRepoImpl @Inject constructor(
     private val chatDao: ChatDao,
     private val remoteService: OziRemoteService,
     private val dataStore: OziDataStore
-) :
-    ChatRepo {
+) : ChatRepo {
     override suspend fun getChats(): Flow<List<Chat>> {
         return chatDao.getChats()
     }
@@ -42,9 +42,9 @@ class ChatRepoImpl @Inject constructor(
         val chatDto = remoteService.getChats(chatId, token)[0]
         val dbChat = chatDao.getChatByChatId(chatId)
         if (dbChat != null) {
-            val updatedChat = if (setUnread){
+            val updatedChat = if (setUnread) {
                 dbChat.deriveUpdatedVersionFromDto(chatDto).copy(hasUnreadMessage = true)
-            } else{
+            } else {
                 dbChat.deriveUpdatedVersionFromDto(chatDto)
             }
             chatDao.update(updatedChat)

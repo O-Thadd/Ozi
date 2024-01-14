@@ -42,8 +42,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.othadd.ozi.common.GROUP_CHAT_NAME
-import com.othadd.ozi.domain.model.User
-import com.othadd.ozi.domain.model.gaming.UserGameState
 import com.othadd.ozi.domain.model.message.ChatItem
 import com.othadd.ozi.domain.model.message.ChatItemType
 import com.othadd.ozi.domain.model.message.MessageSender
@@ -51,13 +49,13 @@ import com.othadd.ozi.domain.model.message.TimeStamp
 import com.othadd.ozi.domain.model.message.UIMessage
 import com.othadd.ozi.ui.Avi
 import com.othadd.ozi.ui.OziTextField
-import com.othadd.ozi.ui.chatItems
+import com.othadd.ozi.chatItems
 import com.othadd.ozi.ui.getAviBGColorDark
 import com.othadd.ozi.ui.getAviBGColorLight
-import com.othadd.ozi.ui.message1
+import com.othadd.ozi.message1
 import com.othadd.ozi.ui.theme.OziComposeTheme
 import com.othadd.ozi.ui.model.Destination
-import com.othadd.ozi.ui.uiTestUIChat
+import com.othadd.ozi.testUIChat
 import com.othadd.oziX.R
 import kotlinx.coroutines.launch
 
@@ -167,7 +165,7 @@ fun PrevChatScreen() {
             confirmSendGameRequest = { _, _ -> },
             showInputLayout = true,
             goBack = { },
-            uiState = uiTestUIChat,
+            uiState = testUIChat,
             sendMessage = { },
             getParticipantsIds = { emptyList() }
         )

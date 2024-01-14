@@ -33,9 +33,9 @@ import com.othadd.ozi.ui.ThemeState
 import com.othadd.ozi.ui.ThemeSwitch
 import com.othadd.ozi.ui.VerifiedIcon
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.ozi.ui.uiTestChat1
-import com.othadd.ozi.ui.uiTestPairChats1
-import com.othadd.ozi.ui.uiTestUser1
+import com.othadd.ozi.testChat1
+import com.othadd.ozi.testPairChats1
+import com.othadd.ozi.testUser1
 
 @Composable
 fun HomeScreenTopBar(
@@ -99,7 +99,7 @@ fun HomeScreenTopBar(
 fun PrevTopBar() {
     OziComposeTheme {
         HomeScreenTopBar(
-            thisUser = uiTestUser1,
+            thisUser = testUser1,
             onAviPressed = {  },
             onMenuButtonPressed = { },
             currentTheme = ThemeState.LIGHT,
@@ -171,7 +171,7 @@ fun Chat(chat: UiChat, onClick: (userId: String) -> Unit) {
 @Composable
 fun PrevChat() {
     OziComposeTheme {
-        Chat(uiTestChat1, { })
+        Chat(testChat1, { })
     }
 }
 
@@ -205,6 +205,6 @@ fun Chats(
 @Composable
 fun PrevChats() {
     OziComposeTheme {
-        Chats(uiTestPairChats1, { })
+        Chats(testPairChats1, { })
     }
 }

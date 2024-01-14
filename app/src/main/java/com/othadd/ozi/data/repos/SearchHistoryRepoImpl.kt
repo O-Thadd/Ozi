@@ -1,10 +1,11 @@
 package com.othadd.ozi.data.repos
 
 import com.othadd.ozi.common.MAX_NUMBER_OF_PREV_SEARCHES
-import com.othadd.ozi.data.dataSources.localStore.OziDataStore
+import com.othadd.ozi.data.dataSources.localStore.DefaultOziDataStore
 import com.othadd.ozi.domain.repos.SearchHistoryRepo
 import com.othadd.ozi.common.stringListToString
 import com.othadd.ozi.common.stringToStringList
+import com.othadd.ozi.data.dataSources.localStore.OziDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map

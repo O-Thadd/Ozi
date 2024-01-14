@@ -1,7 +1,7 @@
 package com.othadd.ozi.data.repos
 
-import android.util.Log
 import com.google.gson.Gson
+import com.othadd.ozi.data.dataSources.localStore.DefaultOziDataStore
 import com.othadd.ozi.data.dataSources.localStore.OziDataStore
 import com.othadd.ozi.domain.model.AppState
 import com.othadd.ozi.domain.repos.AppStateRepo
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class AppStateRepoImpl @Inject constructor(private val dataStore: OziDataStore) : AppStateRepo {
     private val gson = Gson()
 
-    override suspend fun incrementAppStartsCount() {
+    override suspend fun incrementAppStartCount() {
         val initialStateString = dataStore.getAppState().first()
         val initialState = gson.fromJson(initialStateString, AppState::class.java)
         val updatedState = initialState.copy(appStartsCount = initialState.appStartsCount + 1, inForeground = true)

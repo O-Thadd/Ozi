@@ -10,13 +10,14 @@ import com.google.gson.Gson
 import com.othadd.ozi.common.MAX_PAGE_SIZE_PER_REQUEST
 import com.othadd.ozi.common.WORKER_MESSAGE_KEY
 import com.othadd.ozi.data.dataSources.database.daos.MessageDao
-import com.othadd.ozi.data.dataSources.localStore.OziDataStore
+import com.othadd.ozi.data.dataSources.localStore.DefaultOziDataStore
 import com.othadd.ozi.data.dataSources.remote.OziRemoteService
 import com.othadd.ozi.domain.model.message.toMessage
 import com.othadd.ozi.domain.repos.MessageRepo
 import com.othadd.ozi.domain.workers.SendChatMessageWorker
 import com.othadd.ozi.domain.model.message.Message
 import com.othadd.ozi.common.messageToString
+import com.othadd.ozi.data.dataSources.localStore.OziDataStore
 import com.othadd.ozi.domain.model.DataSourcePreference
 import com.othadd.ozi.domain.model.OperationOutcome
 import kotlinx.coroutines.flow.Flow

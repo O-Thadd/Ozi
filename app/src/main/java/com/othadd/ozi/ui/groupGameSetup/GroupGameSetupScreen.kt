@@ -52,9 +52,9 @@ import com.othadd.ozi.ui.User2
 import com.othadd.ozi.ui.model.Destination
 import com.othadd.ozi.ui.model.DialogData
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.ozi.ui.uiTestUser2
-import com.othadd.ozi.ui.uiTestUser3
-import com.othadd.ozi.ui.uiTestUsers1
+import com.othadd.ozi.testUser2
+import com.othadd.ozi.testUser3
+import com.othadd.ozi.testUsers1
 import com.othadd.oziX.R
 import kotlinx.coroutines.launch
 
@@ -265,9 +265,9 @@ fun PrevGroupGameSetup() {
         GroupGameSetupScreen_simple(
             onBackClicked = { },
             search = { },
-            users = OziData.Available(uiTestUsers1),
+            users = OziData.Available(testUsers1),
 //            users = OziData.Fetching(),
-            selectedUsers = listOf(uiTestUser2, uiTestUser3),
+            selectedUsers = listOf(testUser2, testUser3),
 //            selectedUsers = emptyList(),
             onUserClicked = { _, _ -> true },
             sendRequest = { OperationOutcome.Successful() },

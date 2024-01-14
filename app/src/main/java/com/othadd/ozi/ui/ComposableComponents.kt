@@ -74,6 +74,12 @@ import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.domain.model.gaming.GamePrepOutcome
 import com.othadd.ozi.domain.model.gaming.UserGameBrokeringState
 import com.othadd.ozi.domain.model.gaming.UserGameState
+import com.othadd.ozi.testDialogData
+import com.othadd.ozi.testGamePrepDialogData
+import com.othadd.ozi.testMenuData1
+import com.othadd.ozi.testMenuItems
+import com.othadd.ozi.testUser1
+import com.othadd.ozi.testUsers1
 import com.othadd.ozi.ui.model.DialogData
 import com.othadd.ozi.ui.model.GamePrepDialogData
 import com.othadd.ozi.ui.model.MenuData
@@ -714,7 +720,7 @@ fun Dialog(
 @Composable
 fun PrevDialog() {
     OziComposeTheme {
-        Dialog(dialogData = uiTestDialogData)
+        Dialog(dialogData = testDialogData)
     }
 }
 
@@ -747,7 +753,7 @@ fun PrevUsersList() {
     OziComposeTheme {
         Surface {
             UsersList(
-                users = uiTestUsers1,
+                users = testUsers1,
                 onUserClicked = { _, _ -> true }
             )
         }
@@ -837,7 +843,7 @@ fun User1(
 fun PrevUser1() {
     OziComposeTheme {
         User1(
-            user = uiTestUser1,
+            user = testUser1,
             onUserClicked = { _, _ -> true},
             selectable = true,
             selected = null,
@@ -894,7 +900,7 @@ fun User2(
 fun PrevUser2() {
     OziComposeTheme {
         User2(
-            user = uiTestUser1
+            user = testUser1
         )
     }
 }
@@ -1066,7 +1072,7 @@ fun GamePrepDialog(
 fun PrevGamePrepDialog() {
     OziComposeTheme {
         GamePrepDialog(
-            dialogData = uiTestGamePrepDialogData,
+            dialogData = testGamePrepDialogData,
             postAlertDialog = { _, _ -> }
         )
     }
@@ -1300,7 +1306,7 @@ fun MenuItem(
 fun PrevMenuItem() {
     OziComposeTheme {
         MenuItem(
-            menu = uiTestMenuData1,
+            menu = testMenuData1,
             onClick = { }
         )
     }
@@ -1338,7 +1344,7 @@ fun Menu(
 fun PrevMenu() {
     OziComposeTheme {
         Menu(
-            menuItems = uiTestMenuItems,
+            menuItems = testMenuItems,
             onAnyItemClicked = {  },
             modifier = Modifier
         )

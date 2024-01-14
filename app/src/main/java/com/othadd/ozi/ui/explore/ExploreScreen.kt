@@ -1,19 +1,16 @@
 package com.othadd.ozi.ui.explore
 
 import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,13 +21,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -41,17 +35,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.othadd.ozi.ui.MainActivity
 import com.othadd.ozi.ui.OziTextField
 import com.othadd.ozi.ui.UsersList
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.ozi.ui.uiTestUsers1
-import com.othadd.ozi.ui.uiTestUsers2
+import com.othadd.ozi.testUsers1
+import com.othadd.ozi.testUsers2
 import com.othadd.ozi.domain.model.OziData
 import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.ui.TopBar
 import com.othadd.ozi.ui.model.Destination
-import com.othadd.ozi.ui.uiTestUsernames
+import com.othadd.ozi.testUsernames
 import com.othadd.oziX.R
 import kotlinx.coroutines.launch
 
@@ -241,12 +234,12 @@ private fun ExploreScreen_simple(
 fun PrevExploreScreen() {
     OziComposeTheme {
         ExploreScreen_simple(
-            exploredUsers = OziData.Available(uiTestUsers1),
+            exploredUsers = OziData.Available(testUsers1),
             onExploreUserClicked = { _, _ -> },
             onBackClicked = { },
             search = { },
-            previousSearches = uiTestUsernames,
-            searchedUsers = OziData.Available(uiTestUsers2),
+            previousSearches = testUsernames,
+            searchedUsers = OziData.Available(testUsers2),
             onSearchedUserClicked = { _, _ -> },
             onPrevSearchClicked = { _ -> },
             onClearPrevSearch = { _ -> },

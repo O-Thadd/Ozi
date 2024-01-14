@@ -43,8 +43,8 @@ import com.othadd.ozi.ui.ThemeState
 import com.othadd.ozi.ui.model.Destination
 import com.othadd.ozi.ui.model.MenuData
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.ozi.ui.uiTestPairChats1
-import com.othadd.ozi.ui.uiTestUser1
+import com.othadd.ozi.testPairChats1
+import com.othadd.ozi.testUser1
 import com.othadd.oziX.R
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -234,8 +234,8 @@ private fun HomeScreen_simple(
 fun PrevHome() {
     OziComposeTheme {
         HomeScreen_simple(
-            thisUser = uiTestUser1,
-            chats = uiTestPairChats1,
+            thisUser = testUser1,
+            chats = testPairChats1,
 //            chats = emptyList(),
             startChat = { },
             goToGroupGameSetup = {  },

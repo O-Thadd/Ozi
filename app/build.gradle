@@ -56,7 +56,7 @@ dependencies {
     implementation 'androidx.activity:activity-compose:1.7.2'
 
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    testImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
 
@@ -67,13 +67,19 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview"
     implementation "androidx.compose.material3:material3"
     implementation "androidx.compose.runtime:runtime-livedata"
+    testImplementation "androidx.compose.ui:ui-test-junit4:1.5.1" // this is same version as specified by bom. but for some reason if not explicitly specified it throws a warning after build
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.5.1" // this is same version as specified by bom. but for some reason if not explicitly specified it throws a warning after build
     debugImplementation "androidx.compose.ui:ui-tooling"
     debugImplementation "androidx.compose.ui:ui-test-manifest"
+    // Navigation Compose
+    def nav_version = "2.7.3"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 
     def room_version = "2.5.2"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
 
     def lifecycle_version = "2.6.1"
     // ViewModel
@@ -130,8 +136,4 @@ dependencies {
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
     //Hilt + Navigation_Compose
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
-
-    // Navigation Compose
-    def nav_version = "2.7.3"
-    implementation("androidx.navigation:navigation-compose:$nav_version")
 }

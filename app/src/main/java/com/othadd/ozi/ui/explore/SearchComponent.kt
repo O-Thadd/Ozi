@@ -27,9 +27,9 @@ import androidx.compose.ui.unit.dp
 import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.ui.UsersList
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.ozi.ui.uiTestUsers1
+import com.othadd.ozi.testUsers1
 import com.othadd.ozi.domain.model.OziData
-import com.othadd.ozi.ui.uiTestUsernames
+import com.othadd.ozi.testUsernames
 
 @Composable
 fun SearchComponent(
@@ -122,12 +122,12 @@ fun SearchComponent(
 fun PrevSearchScreen() {
     OziComposeTheme {
         SearchComponent(
-            previousSearch = uiTestUsernames,
+            previousSearch = testUsernames,
             onSearchedUserClicked = { _, _ -> },
             onPrevSearchClicked = {  },
             onClearPrevSearch = {  },
             onClearAllPrevSearch = {  },
-            searchedUsers = OziData.Available(uiTestUsers1)
+            searchedUsers = OziData.Available(testUsers1)
         )
     }
 }

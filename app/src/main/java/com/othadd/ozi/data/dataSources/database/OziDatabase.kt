@@ -16,7 +16,7 @@ import com.othadd.ozi.domain.model.message.Message
 
 @Database(entities = [Chat::class, Message::class, User::class, NotifHistoryEntry::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class ChatRoomDatabase : RoomDatabase() {
+abstract class OziDatabase : RoomDatabase() {
 
     abstract fun chatDao(): ChatDao
     abstract fun userDao(): UserDao
@@ -25,12 +25,12 @@ abstract class ChatRoomDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE: ChatRoomDatabase? = null
-        fun getDatabase(context: Context): ChatRoomDatabase {
+        private var INSTANCE: OziDatabase? = null
+        fun getDatabase(context: Context): OziDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    ChatRoomDatabase::class.java,
+                    OziDatabase::class.java,
                     "ozi_database"
                 )
                     .fallbackToDestructiveMigration()

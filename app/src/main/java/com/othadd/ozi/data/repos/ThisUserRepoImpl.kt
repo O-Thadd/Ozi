@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.othadd.ozi.common.STATUS_FAILURE
+import com.othadd.ozi.data.dataSources.localStore.DefaultOziDataStore
 import com.othadd.ozi.data.dataSources.localStore.OziDataStore
 import com.othadd.ozi.data.dataSources.model.RemoteUsersRequestType
 import com.othadd.ozi.data.dataSources.remote.OziRemoteService

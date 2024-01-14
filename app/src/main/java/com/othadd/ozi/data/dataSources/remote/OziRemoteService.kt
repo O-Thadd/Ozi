@@ -20,21 +20,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
-private val interceptor = HttpLoggingInterceptor()
-    .setLevel(HttpLoggingInterceptor.Level.BODY)
-
-private val client = OkHttpClient.Builder()
-    .addInterceptor(interceptor)
-    .readTimeout(120, TimeUnit.SECONDS)
-    .build()
-
-val retrofit: Retrofit = Retrofit.Builder()
-    .addConverterFactory(ScalarsConverterFactory.create())
-    .addConverterFactory(GsonConverterFactory.create())
-    .baseUrl(BASE_URL)
-    .client(client)
-    .build()
-
 interface OziRemoteService {
 
     @POST("v2/users")

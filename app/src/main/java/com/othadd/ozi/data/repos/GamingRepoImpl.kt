@@ -3,6 +3,7 @@ package com.othadd.ozi.data.repos
 import com.google.gson.JsonObject
 import com.othadd.ozi.common.Params
 import com.othadd.ozi.common.stringListToString
+import com.othadd.ozi.data.dataSources.localStore.DefaultOziDataStore
 import com.othadd.ozi.data.dataSources.localStore.OziDataStore
 import com.othadd.ozi.data.dataSources.remote.OziRemoteService
 import com.othadd.ozi.domain.model.User
@@ -18,7 +19,6 @@ class GamingRepoImpl @Inject constructor(
     private val dataStore: OziDataStore,
     private val appStateRepo: AppStateRepo
 ): GamingRepo {
-
     override suspend fun sendGamingRequest(participantsIds: List<String>): String {
         val thisUser = dataStore.getThisUserFlow().first()!!
         val participantsIdsString = stringListToString(participantsIds)

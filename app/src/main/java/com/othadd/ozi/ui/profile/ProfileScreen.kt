@@ -1,6 +1,5 @@
 package com.othadd.ozi.ui.profile
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -24,14 +23,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -48,9 +45,8 @@ import com.othadd.ozi.ui.Avi
 import com.othadd.ozi.ui.AviChooserDialog
 import com.othadd.ozi.ui.TopBar
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.ozi.ui.uiTestUser5
+import com.othadd.ozi.testUser5
 import com.othadd.oziX.R
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
 fun ProfileScreen(
@@ -332,7 +328,7 @@ fun ProfileScreen_simple(
 fun PrevProfileScreen() {
     OziComposeTheme {
         ProfileScreen_simple(
-            user = uiTestUser5,
+            user = testUser5,
             fetchingData = true,
             updating = true,
             update = { _, _, _ -> },
