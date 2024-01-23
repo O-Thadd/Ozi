@@ -54,7 +54,7 @@ fun ExploreScreen(
     onBackClicked: () -> Unit,
     updateCurrentDestination: (String) -> Unit,
 ) {
-    val viewModel: ExploreViewmodel = hiltViewModel()
+    val viewModel: ExploreViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current

@@ -35,12 +35,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.othadd.ozi.common.CHAT_INPUT_LAYOUT_GAME_BUTTON
+import com.othadd.ozi.common.CHAT_INPUT_LAYOUT_SEND_BUTTON
+import com.othadd.ozi.common.CHAT_SCREEN
+import com.othadd.ozi.common.GO_BACK_BUTTON
 import com.othadd.ozi.common.GROUP_CHAT_NAME
 import com.othadd.ozi.domain.model.message.ChatItem
 import com.othadd.ozi.domain.model.message.ChatItemType
@@ -49,7 +55,7 @@ import com.othadd.ozi.domain.model.message.TimeStamp
 import com.othadd.ozi.domain.model.message.UIMessage
 import com.othadd.ozi.ui.Avi
 import com.othadd.ozi.ui.OziTextField
-import com.othadd.ozi.chatItems
+import com.othadd.ozi.testChatItems
 import com.othadd.ozi.ui.getAviBGColorDark
 import com.othadd.ozi.ui.getAviBGColorLight
 import com.othadd.ozi.message1
@@ -66,8 +72,8 @@ fun ChatScreen(
     confirmSendGameRequest: (List<String>, String) -> Unit,
     gameModeratorId: String?,
     goBack: () -> Unit,
+    viewModel: ChatViewModel = hiltViewModel()
 ) {
-    val viewModel: ChatViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val isGameChat = remember(uiState.chatId.length) { uiState.chatId.length <= 40 }
     val showInputLayout =
@@ -105,7 +111,8 @@ fun ChatScreen_simple(
     val coroutineScope = rememberCoroutineScope()
 
     Surface(
-        color = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.background,
+        modifier = Modifier.semantics { contentDescription = CHAT_SCREEN }
     ) {
         Column(
             modifier = Modifier
@@ -190,6 +197,7 @@ fun InputLayout(
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
+                    .semantics { contentDescription = CHAT_INPUT_LAYOUT_GAME_BUTTON }
                     .clickable {
                         onGameClicked()
                     }
@@ -209,6 +217,7 @@ fun InputLayout(
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
+                    .semantics { contentDescription = CHAT_INPUT_LAYOUT_SEND_BUTTON }
                     .clickable {
                         if (text.isNotBlank()) {
                             onSendClicked(text)
@@ -251,6 +260,7 @@ fun TopBar(
             contentDescription = null,
             tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier
+                .semantics { contentDescription = GO_BACK_BUTTON }
                 .clickable { onBackClicked() }
                 .align(Alignment.CenterStart)
         )
@@ -263,7 +273,7 @@ fun TopBar(
             Avi(
                 fg = fg,
                 bg = bg,
-                modifier = Modifier.size(50.dp)
+                sizeDp = 50
             )
 
             Spacer(modifier = Modifier.width(8.dp))
@@ -535,7 +545,7 @@ fun ChatItems(
 fun PrevChatItems() {
     OziComposeTheme {
         ChatItems(
-            chatItems = chatItems,
+            chatItems = testChatItems,
             forGroup = true
         )
     }

@@ -15,6 +15,7 @@ import com.othadd.ozi.ui.model.Destination.ONBOARDING
 fun NavGraphBuilder.onBoardingGraph(
     navController: NavController,
     updateCurrentDestination: (String) -> Unit,
+    setUiReady: () -> Unit,
     exitApp: () -> Unit
 ){
     fun goToHome() {
@@ -31,6 +32,7 @@ fun NavGraphBuilder.onBoardingGraph(
                 goToRegister = { navController.navigate(ONBOARDING.REGISTER.route) },
                 goToLogin = { navController.navigate(ONBOARDING.LOGIN.route) },
                 goToHome = { goToHome() },
+                setUiReady = setUiReady,
                 exitApp = exitApp
             )
         }

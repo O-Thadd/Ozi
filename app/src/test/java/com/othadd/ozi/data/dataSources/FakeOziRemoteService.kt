@@ -16,6 +16,7 @@ import com.othadd.ozi.testUser1
 import com.othadd.ozi.testUser2
 import com.othadd.ozi.testUser3
 import com.othadd.ozi.testUser4
+import kotlinx.coroutines.delay
 
 class FakeOziRemoteService: OziRemoteService {
     private var networkError = false
@@ -28,6 +29,7 @@ class FakeOziRemoteService: OziRemoteService {
         aviBg: Int,
         fcmToken: String
     ): JsonObject {
+        delay(2_000)
         if (networkError){
             throw Exception("fake network error")
         }
@@ -48,6 +50,7 @@ class FakeOziRemoteService: OziRemoteService {
     override suspend fun postToUser(data: String, token: String) { }
 
     override suspend fun login(username: String, password: String, fcmToken: String): JsonObject {
+        delay(2_000)
         if (networkError){
             throw Exception("fake network error")
         }
@@ -70,6 +73,7 @@ class FakeOziRemoteService: OziRemoteService {
         username: String?,
         userId: String?
     ): List<User> {
+        delay(2_000)
         return when(RemoteUsersRequestType.getType(requestType)){
             RemoteUsersRequestType.SPECIFIC -> listOf(testUser1.copy(userId = userId!!))
             RemoteUsersRequestType.SUGGESTED -> listOf(testUser1, testUser2)
@@ -86,6 +90,7 @@ class FakeOziRemoteService: OziRemoteService {
         lastMessageId: String?,
         token: String
     ): List<MessageDto> {
+        delay(2_000)
         val message1 = Message(
             senderId = "sender1id",
             chatId = "chat1id",
@@ -115,6 +120,7 @@ class FakeOziRemoteService: OziRemoteService {
     }
 
     override suspend fun getChats(chatId: String?, token: String): List<ChatDto> {
+        delay(2_000)
         val chat1 = Chat("chat1", listOf("id1, id2"), false)
         val chat2 = Chat("chat2", listOf("id1, id2"), false)
         return listOf(chat1, chat2).map { it.toChatDto() }

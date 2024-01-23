@@ -9,7 +9,7 @@ import com.othadd.ozi.common.PASSED
 import com.othadd.ozi.domain.model.OperationOutcome
 import com.othadd.ozi.domain.model.OziData
 import com.othadd.ozi.domain.model.User
-import com.othadd.ozi.domain.useCases.user.ThisUserUseCases
+import com.othadd.ozi.domain.useCases.interfaces.user.ThisUserUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

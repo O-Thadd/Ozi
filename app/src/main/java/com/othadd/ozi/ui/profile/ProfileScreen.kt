@@ -89,7 +89,7 @@ fun ProfileScreen(
         }
     }
 
-    LaunchedEffect(key1 = true){
+    LaunchedEffect(key1 = true) {
         viewModel.refresh()
     }
 }
@@ -109,7 +109,14 @@ fun ProfileScreen_simple(
     var username by remember(user) { mutableStateOf(user?.username ?: "") }
     var usernameSupportingText by remember { mutableStateOf("") }
     var usernameIsError by remember { mutableStateOf(false) }
-    var aviSelection by remember(user) { mutableStateOf(Pair(user?.aviFg ?: -1, user?.aviBg ?: -1)) }
+    var aviSelection by remember(user) {
+        mutableStateOf(
+            Pair(
+                user?.aviFg ?: -1,
+                user?.aviBg ?: -1
+            )
+        )
+    }
     var shouldEnableUpdateButton by remember { mutableStateOf(false) }
 
     Surface(
@@ -136,16 +143,20 @@ fun ProfileScreen_simple(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Box {
-                    Avi(
-                        fg = aviSelection.first,
-                        bg = aviSelection.second,
+                    Box(
                         modifier = Modifier
                             .clickable(
                                 interactionSource = MutableInteractionSource(),
                                 indication = null
                             ) { aviChooserShowing = true }
                             .size(150.dp)
-                    )
+                    ) {
+                        Avi(
+                            fg = aviSelection.first,
+                            bg = aviSelection.second,
+                            sizeDp = 150
+                        )
+                    }
 
                     Surface(
                         shape = CircleShape,

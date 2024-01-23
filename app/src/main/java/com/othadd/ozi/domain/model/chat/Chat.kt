@@ -3,14 +3,14 @@ package com.othadd.ozi.domain.model.chat
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.othadd.ozi.common.GROUP_CHAT_NAME
-import com.othadd.ozi.domain.repos.UsersRepo
-import com.othadd.ozi.domain.useCases.DateTimeFormatType
-import com.othadd.ozi.domain.useCases.GetFormattedDateTimeUseCase
-import com.othadd.ozi.domain.model.OperationOutcome
 import com.othadd.ozi.common.getOtherParticipantId
 import com.othadd.ozi.domain.model.DataSourcePreference
+import com.othadd.ozi.domain.model.OperationOutcome
 import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.domain.model.message.Message
+import com.othadd.ozi.domain.repos.UsersRepo
+import com.othadd.ozi.domain.useCases.implementations.DateTimeFormatType
+import com.othadd.ozi.domain.useCases.interfaces.GetFormattedDateTimeUseCase
 
 @Entity(tableName = "chats")
 data class Chat(

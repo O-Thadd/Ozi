@@ -1,6 +1,7 @@
 package com.othadd.ozi.di
 
 import android.content.Context
+import com.othadd.ozi.BaseOziApplication
 import com.othadd.ozi.OziApplication
 import dagger.Module
 import dagger.Provides
@@ -18,8 +19,8 @@ object CoreModule {
     }
 
     @Provides
-    fun provideOziApp(context: Context): OziApplication {
-        return context as OziApplication
+    fun provideBaseOziApp(context: Context): BaseOziApplication {
+        return context as BaseOziApplication
     }
 
 }

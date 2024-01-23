@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.othadd.ozi.common.GROUP_CHAT_NAME
 import com.othadd.ozi.common.getOtherParticipantId
-import com.othadd.ozi.domain.useCases.chat.GetChatUseCase
-import com.othadd.ozi.domain.useCases.message.GetMessagesUseCase
-import com.othadd.ozi.domain.useCases.message.MarkMessagesReadUseCase
-import com.othadd.ozi.domain.useCases.message.SendMessageUseCase
-import com.othadd.ozi.domain.useCases.user.GetUsersUseCases
-import com.othadd.ozi.domain.useCases.user.ThisUserUseCases
+import com.othadd.ozi.domain.useCases.interfaces.chat.GetSingleChatUseCase
+import com.othadd.ozi.domain.useCases.interfaces.message.GetMessagesUseCase
+import com.othadd.ozi.domain.useCases.interfaces.user.GetUsersUseCases
+import com.othadd.ozi.domain.useCases.interfaces.message.MarkMessagesReadUseCase
+import com.othadd.ozi.domain.useCases.interfaces.message.SendMessageUseCase
+import com.othadd.ozi.domain.useCases.interfaces.user.ThisUserUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -22,11 +22,11 @@ import javax.inject.Inject
 const val CHAT_ID_KEY = "chatId"
 
 @HiltViewModel
-class ChatViewModel @Inject constructor(
-    private val getUsersUseCases: GetUsersUseCases,
+open class ChatViewModel @Inject constructor(
     private val sendMessageUseCase: SendMessageUseCase,
     private val markMessagesReadUseCase: MarkMessagesReadUseCase,
-    private val getChatUseCase: GetChatUseCase,
+    private val getSingleChatUseCase: GetSingleChatUseCase,
+    getUsersUseCases: GetUsersUseCases,
     getMessagesUseCase: GetMessagesUseCase,
     thisUserUseCases: ThisUserUseCases,
     savedStateHandle: SavedStateHandle
@@ -35,9 +35,9 @@ class ChatViewModel @Inject constructor(
     var uiState = MutableStateFlow(ChatUiState.DEFAULT)
     private lateinit var chatMateId: String
     private lateinit var thisUserId: String
-    val chatId: String = checkNotNull(savedStateHandle[CHAT_ID_KEY])
+    private val chatId: String = checkNotNull(savedStateHandle[CHAT_ID_KEY])
 
-    fun sendMessage(messageBody: String) {
+    open fun sendMessage(messageBody: String) {
         viewModelScope.launch {
             sendMessageUseCase(messageBody, chatId)
         }
@@ -53,7 +53,7 @@ class ChatViewModel @Inject constructor(
      * Returns participantsIds except this user
      */
     suspend fun getParticipantsIds(): List<String> {
-        return getChatUseCase.invoke(chatId).first().participantIds.toMutableList().apply { remove(thisUserId) }
+        return getSingleChatUseCase.invoke(chatId).first().participantIds.toMutableList().apply { remove(thisUserId) }
     }
 
     init {

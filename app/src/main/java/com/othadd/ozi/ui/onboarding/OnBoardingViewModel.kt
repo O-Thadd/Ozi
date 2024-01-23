@@ -3,10 +3,10 @@ package com.othadd.ozi.ui.onboarding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.othadd.ozi.domain.model.ServerResponseStatus
-import com.othadd.ozi.domain.useCases.user.ThisUserUseCases
-import com.othadd.ozi.domain.useCases.user.LoginUserUseCase
-import com.othadd.ozi.domain.useCases.user.RegisterUserUseCase
 import com.othadd.ozi.domain.model.OperationOutcome
+import com.othadd.ozi.domain.useCases.interfaces.user.LoginUserUseCase
+import com.othadd.ozi.domain.useCases.interfaces.user.RegisterUserUseCase
+import com.othadd.ozi.domain.useCases.interfaces.user.ThisUserUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

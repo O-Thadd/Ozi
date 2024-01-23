@@ -29,12 +29,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navDeepLink
+import com.othadd.ozi.common.BOTTOM_BAR_EXPLORE_BUTTON
+import com.othadd.ozi.common.BOTTOM_BAR_HOME_BUTTON
 import com.othadd.ozi.common.OZI_APP_URI
 import com.othadd.ozi.ui.chat.CHAT_ID_KEY
 import com.othadd.ozi.ui.chat.ChatScreen
@@ -54,6 +58,8 @@ fun OziApp(
     updateCurrentDestination: (String) -> Unit,
     switchTheme: () -> Unit,
     sortOutNotificationPermission: () -> Unit,
+    runOnUiThread: (() -> Unit) -> Unit,
+    setUiReady: () -> Unit,
     exitApp: () -> Unit
 ) {
     val navController = rememberNavController()
@@ -84,6 +90,7 @@ fun OziApp(
                     onBoardingGraph(
                         navController = navController,
                         updateCurrentDestination = updateCurrentDestination,
+                        setUiReady = setUiReady,
                         exitApp = exitApp
                     )
 
@@ -106,7 +113,8 @@ fun OziApp(
                             },
                             currentTheme = if(appIuState?.appState?.darkTheme == true) ThemeState.DARK else ThemeState.LIGHT,
                             switchTheme = switchTheme,
-                            sortOutNotificationPermission = sortOutNotificationPermission
+                            sortOutNotificationPermission = sortOutNotificationPermission,
+                            setUiReady = setUiReady
                         )
                     }
 
@@ -120,14 +128,17 @@ fun OziApp(
                                 mainActivityViewModel.confirmSendGameRequest(ids, chatmateName)
                             },
                             gameModeratorId = appIuState?.appState?.gameModeratorId,
-                        ) { navController.popBackStack() }
+                            goBack = { navController.popBackStack() }
+                        )
                     }
 
                     composable(Destination.EXPLORE.route) {
                         ExploreScreen(
                             onUserClicked = {
-                                navController.navigate("${Destination.CHAT.route}/$it") {
-                                    popUpTo(Destination.HOME.route)
+                                runOnUiThread {
+                                    navController.navigate("${Destination.CHAT.route}/$it") {
+                                        popUpTo(Destination.HOME.route)
+                                    }
                                 }
                             },
                             onBackClicked = { navController.popBackStack() },
@@ -248,6 +259,7 @@ fun BottomBar(
                     else -> MaterialTheme.colorScheme.primary
                 },
                 modifier = Modifier
+                    .semantics { contentDescription = BOTTOM_BAR_HOME_BUTTON }
                     .clickable {
                         if (currentDestination != Destination.HOME.route) {
                             goToHome()
@@ -264,6 +276,7 @@ fun BottomBar(
                     else -> MaterialTheme.colorScheme.onBackground
                 },
                 modifier = Modifier
+                    .semantics { contentDescription = BOTTOM_BAR_EXPLORE_BUTTON }
                     .clickable {
                         if (currentDestination != Destination.EXPLORE.route) {
                             goToExplore()

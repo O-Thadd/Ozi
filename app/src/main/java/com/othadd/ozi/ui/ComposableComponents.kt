@@ -61,6 +61,8 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -70,6 +72,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.othadd.ozi.common.AVI_BACKGROUND
+import com.othadd.ozi.common.AVI_CHOOSER_DIALOG
+import com.othadd.ozi.common.AVI_ICON
+import com.othadd.ozi.common.HOME_MENU_BUTTON
+import com.othadd.ozi.common.TEXT_FIELD
+import com.othadd.ozi.common.USER_ITEM
 import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.domain.model.gaming.GamePrepOutcome
 import com.othadd.ozi.domain.model.gaming.UserGameBrokeringState
@@ -95,18 +103,22 @@ import java.util.Calendar
 import kotlin.math.roundToInt
 
 @Composable
-fun Avi(fg: Int = -1, bg: Int = -1, modifier: Modifier) {
+fun Avi(
+    fg: Int = -1,
+    bg: Int = -1,
+    sizeDp: Int
+) {
     Surface(
         color = getAviBGColor(bg),
         shape = CircleShape,
-        modifier = modifier
+        modifier = Modifier.size(sizeDp.dp)
     ) {
         Box {
             if (fg != -1) {
                 Image(
                     painter = getAviFGPainter(fg),
                     contentDescription = null,
-                    modifier.padding(4.dp)
+                    modifier = Modifier.padding(4.dp)
                 )
             } else {
                 Text(
@@ -125,7 +137,7 @@ fun Avi(fg: Int = -1, bg: Int = -1, modifier: Modifier) {
 @Composable
 fun PrevAvi() {
     OziComposeTheme(darkTheme = true) {
-        Avi(-1, -1, Modifier.size(80.dp))
+        Avi(-1, -1, 80)
     }
 }
 
@@ -310,7 +322,7 @@ fun OziTextField(
     leadingIcon: @Composable () -> Unit,
     placeHolder: @Composable () -> Unit,
     trailingIcon: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
+    padding: Int = 0,
     onClicked: (() -> Unit)? = null,
     suggestions: Boolean = true
 ) {
@@ -326,7 +338,7 @@ fun OziTextField(
     Surface(
         color = MaterialTheme.colorScheme.surface,
         shape = RoundedCornerShape(8.dp),
-        modifier = modifier
+        modifier = Modifier.padding(padding.dp)
     ) {
         Row(
             verticalAlignment = Alignment.Bottom,
@@ -359,6 +371,7 @@ fun OziTextField(
                     else
                         KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
                     modifier = Modifier
+                        .semantics { contentDescription = TEXT_FIELD }
                         .fillMaxWidth()
                 )
             }
@@ -491,7 +504,8 @@ fun AviChooserDialog(
 
     Surface(
         shape = RoundedCornerShape(16.dp),
-        tonalElevation = 6.dp
+        tonalElevation = 6.dp,
+        modifier = Modifier.semantics { contentDescription = AVI_CHOOSER_DIALOG }
     ) {
         Column(
             modifier = Modifier.padding(32.dp)
@@ -527,7 +541,8 @@ fun AviChooserDialog(
                             i == selectedFg,
                             onSelected = {
                                 selectedFg = i
-                            }
+                            },
+                            contentDescription = "$AVI_ICON $i"
                         )
                     }
                 }
@@ -551,7 +566,8 @@ fun AviChooserDialog(
                         aviBg = i,
                         selected = i == selectedBg,
                         onSelected = { selectedBg = it },
-                        modifier = Modifier.size(75.dp)
+                        sizeDp = 75,
+                        contentDescription = "$AVI_BACKGROUND $i"
                     )
                 }
             }
@@ -592,11 +608,17 @@ fun PrevAviChooser() {
 fun SelectableAviFg(
     aviFG: Int,
     selected: Boolean,
-    onSelected: (Int) -> Unit
+    onSelected: (Int) -> Unit,
+    contentDescription: String? = null
 ) {
 
     Box(
         modifier = Modifier
+            .semantics {
+                if (contentDescription != null) {
+                    this.contentDescription = contentDescription
+                }
+            }
             .clickable(
                 interactionSource = MutableInteractionSource(),
                 indication = null
@@ -631,13 +653,20 @@ fun SelectableAviBg(
     aviBg: Int,
     selected: Boolean,
     onSelected: (Int) -> Unit,
-    modifier: Modifier
+    sizeDp: Int,
+    contentDescription: String? = null
 ) {
 
     Surface(
         color = getAviBGColor(aviBg),
         shape = RoundedCornerShape(16.dp),
-        modifier = modifier
+        modifier = Modifier
+            .semantics {
+                if (contentDescription != null) {
+                    this.contentDescription = contentDescription
+                }
+            }
+            .size(sizeDp.dp)
             .clickable(
                 interactionSource = MutableInteractionSource(),
                 indication = null
@@ -658,7 +687,7 @@ fun SelectableAviBg(
 @Composable
 fun PrevSelectableAviBg() {
     OziComposeTheme {
-        SelectableAviBg(4, true, { }, Modifier.size(200.dp))
+        SelectableAviBg(4, true, { }, 200)
     }
 }
 
@@ -776,6 +805,7 @@ fun User1(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
+            .semantics { contentDescription = "$USER_ITEM ${user.username}" }
             .clickable {
                 if (selectable && selectOnClick) {
                     actualSelected = !actualSelected
@@ -791,7 +821,7 @@ fun User1(
             Avi(
                 fg = user.aviFg,
                 bg = user.aviBg,
-                modifier = Modifier.size(40.dp)
+                sizeDp = 40
             )
 
             if (actualSelected) {
@@ -867,7 +897,7 @@ fun User2(
         Avi(
             fg = user.aviFg,
             bg = user.aviBg,
-            modifier = Modifier.size(40.dp)
+            sizeDp = 40
         )
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -1229,7 +1259,7 @@ fun GameParticipant(
         Avi(
             fg = user.aviFg,
             bg = user.aviBg,
-            modifier = Modifier.size(40.dp)
+            sizeDp = 40
         )
 
         Spacer(modifier = Modifier.width(8.dp))
@@ -1357,7 +1387,9 @@ fun MenuButtonIcon(
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(2.dp),
-        modifier = Modifier.clickable { onClick() }
+        modifier = Modifier
+            .semantics { contentDescription = HOME_MENU_BUTTON }
+            .clickable { onClick() }
     ) {
         (1..3).forEach{ _ ->
             Surface(

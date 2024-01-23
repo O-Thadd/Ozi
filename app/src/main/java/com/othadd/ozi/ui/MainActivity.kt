@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -36,18 +38,25 @@ import com.othadd.ozi.common.WORKER_USER_KEY
 import com.othadd.ozi.domain.model.OziNotificationChannel
 import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.domain.workers.UpdateUserStateWorker
+import com.othadd.ozi.ui.model.DefaultSplashScreenSetupRunner
 import com.othadd.ozi.ui.model.DialogData
+import com.othadd.ozi.ui.model.SplashScreenSetupRunner
 import com.othadd.ozi.ui.theme.OziComposeTheme
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "oziStore")
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val mainActivityViewModel: MainActivityViewModel by viewModels()
+    val mainActivityViewModel: MainActivityViewModel by viewModels()
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -66,8 +75,18 @@ class MainActivity : ComponentActivity() {
 
     private var notificationPermissionAlreadyRequestedFromHomeScreen = false
 
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface SplashRunnerProvider {
+        fun getRunner(): SplashScreenSetupRunner
+    }
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU) // for notification permission request
     override fun onCreate(savedInstanceState: Bundle?) {
+        val provider = EntryPointAccessors.fromApplication(this, SplashRunnerProvider::class.java)
+        val splashRunner = provider.getRunner()
+        splashRunner(this)
+
         super.onCreate(savedInstanceState)
         setContent {
             val uiState by mainActivityViewModel.uiState.collectAsStateWithLifecycle(initialValue = null)
@@ -86,7 +105,12 @@ class MainActivity : ComponentActivity() {
                         },
                         switchTheme = { mainActivityViewModel.changeAppTheme() },
                         sortOutNotificationPermission = { sortOutNotificationPermissionFromHome() },
-                        exitApp = { finish() }
+                        runOnUiThread = myRunOnUiThread,
+                        exitApp = { finish() },
+                        setUiReady = {
+                            Log.e("observexx", "splash condition update called")
+                            mainActivityViewModel.setUiReady()
+                        }
                     )
                 }
             }
@@ -105,7 +129,6 @@ class MainActivity : ComponentActivity() {
         sortOutNotificationPermission()
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onResume() {
         super.onResume()
         mainActivityViewModel.updateForegroundState(true)
@@ -258,5 +281,9 @@ class MainActivity : ComponentActivity() {
                 sortOutNotificationPermission()
             }
         }
+    }
+
+    private val myRunOnUiThread = { blockToRun: () -> Unit ->
+        runOnUiThread { blockToRun.invoke() }
     }
 }

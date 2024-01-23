@@ -8,7 +8,7 @@ import com.google.gson.Gson
 import com.othadd.ozi.common.WORKER_USER_KEY
 import com.othadd.ozi.data.dataSources.remote.OziRemoteService
 import com.othadd.ozi.domain.model.User
-import com.othadd.ozi.domain.useCases.user.ThisUserUseCases
+import com.othadd.ozi.domain.useCases.interfaces.user.ThisUserUseCases
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 

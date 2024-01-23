@@ -18,7 +18,7 @@ import com.othadd.oziX.R
 
 val testUser1 = User(
     username = "Mr. State",
-    userId = "user1Id",
+    userId = "deb1574b-6532-4cec-80ff-0eaa55c1212d",
     aviFg = 7,
     aviBg = 3,
     online = true,
@@ -29,7 +29,7 @@ val testUser1 = User(
 
 val testUser2 = User(
     username = "Francesca",
-    userId = "user2Id",
+    userId = "2fde73c2-821f-48da-b35d-09bc4f5df562",
     aviFg = 8,
     aviBg = 1,
     online = true,
@@ -40,7 +40,7 @@ val testUser2 = User(
 
 val testUser3 = User(
     username = "Alehandro",
-    userId = "user3Id",
+    userId = "3875d062-4620-44a5-b8c5-cf364c4b1664",
     aviFg = 9,
     aviBg = 2,
     online = false,
@@ -51,7 +51,7 @@ val testUser3 = User(
 
 val testUser4 = User(
     username = "montero",
-    userId = "user4Id",
+    userId = "acb1b74e-61c4-4cd2-9d4f-66a777d41469",
     aviFg = 10,
     aviBg = 3,
     online = true,
@@ -62,7 +62,7 @@ val testUser4 = User(
 
 val testUser5 = User(
     username = "Carlos",
-    userId = "user5Id",
+    userId = "21c88c24-18ec-4c08-b82c-4d7e00a33a27",
     aviFg = 11,
     aviBg = 1,
     online = false,
@@ -73,7 +73,7 @@ val testUser5 = User(
 
 val testUser6 = User(
     username = "Veritas",
-    userId = "user6Id",
+    userId = "526806ba-1561-418d-a838-5b51d19f0e77",
     aviFg = 12,
     aviBg = 1,
     online = true,
@@ -84,7 +84,7 @@ val testUser6 = User(
 
 val testUser7 = User(
     username = "Monalisa",
-    userId = "user7Id",
+    userId = "9b277f54-62db-4c10-9c73-e764ee30a356",
     aviFg = 13,
     aviBg = 3,
     online = true,
@@ -95,7 +95,7 @@ val testUser7 = User(
 
 val testUser8 = User(
     username = "Pedro",
-    userId = "user8Id",
+    userId = "3c86c9db-c966-41b2-9625-814933cda9d7",
     aviFg = 14,
     aviBg = 2,
     online = true,
@@ -106,7 +106,7 @@ val testUser8 = User(
 
 val testUser9 = User(
     username = "Roberto",
-    userId = "user9Id",
+    userId = "dd6e0e05-378b-41ae-9076-11e2513db57e",
     aviFg = 15,
     aviBg = 3,
     online = false,
@@ -117,7 +117,7 @@ val testUser9 = User(
 
 val testUser10 = User(
     username = "Manuel",
-    userId = "user10Id",
+    userId = "dbf934db-db7c-4986-a32d-d57b4173b05c",
     aviFg = 16,
     aviBg = 1,
     online = true,
@@ -321,7 +321,7 @@ val message6 = UIMessage(
 
 val timeStamp4 = TimeStamp(message6.time, message6.sent, message6.senderType)
 
-val chatItems = listOf(
+val testChatItems = listOf(
     date1,
     message1,
     message2,
@@ -343,5 +343,5 @@ val testUIChat = ChatUiState(
     aviFg = testUser1.aviFg,
     aviBg = testUser1.aviBg,
     verified = testUser1.verified,
-    chatItems = chatItems
+    chatItems = testChatItems
 )

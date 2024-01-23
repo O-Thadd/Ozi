@@ -80,8 +80,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\thadd\Desktop\Working Directory\Ozi compose\ozi icon white.svg" />
-                                                <entry key="scalingPercent" value="50" />
+                                                <entry key="imagePath" value="C:\Users\thadd\Desktop\Working Directory\Ozi compose\ozi compose splash center icon.svg" />
+                                                <entry key="scalingPercent" value="67" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -115,7 +115,9 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="252331" />
+                                      <entry key="generateRoundIcon" value="false" />
                                       <entry key="generateWebpIcons" value="false" />
+                                      <entry key="outputName" value="ic_splash" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -7,10 +7,10 @@ import com.othadd.ozi.domain.model.AppUiState
 import com.othadd.ozi.domain.model.OperationOutcome
 import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.domain.model.gaming.GamePrepOutcome
-import com.othadd.ozi.domain.useCases.AppStateUseCases
-import com.othadd.ozi.domain.useCases.NotificationUseCases
-import com.othadd.ozi.domain.useCases.chat.LogoutUseCase
-import com.othadd.ozi.domain.useCases.user.ThisUserUseCases
+import com.othadd.ozi.domain.useCases.interfaces.AppStateUseCases
+import com.othadd.ozi.domain.useCases.interfaces.user.LogoutUseCase
+import com.othadd.ozi.domain.useCases.interfaces.NotificationUseCases
+import com.othadd.ozi.domain.useCases.interfaces.user.ThisUserUseCases
 import com.othadd.ozi.ui.model.DialogData
 import com.othadd.ozi.ui.model.GamePrepDialogData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,6 +46,13 @@ class MainActivityViewModel @Inject constructor(
 
     private val _gamePrepDialogFlow = MutableStateFlow<GamePrepDialogData?>(null)
     val gamePrepDialogFlow = _gamePrepDialogFlow.asStateFlow()
+
+    var uiReady = false
+        private set
+
+    fun setUiReady(){
+        uiReady = true
+    }
 
     fun updateCurrentDestination(destinationRoute: String) {
         currentDestinationFlow.value = destinationRoute

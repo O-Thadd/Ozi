@@ -8,7 +8,7 @@ import com.othadd.ozi.domain.model.OziData
 import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.domain.repos.ChatRepo
 import com.othadd.ozi.domain.repos.ThisUserRepo
-import com.othadd.ozi.domain.useCases.user.GetUsersUseCases
+import com.othadd.ozi.domain.useCases.interfaces.user.GetUsersUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

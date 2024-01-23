@@ -22,9 +22,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.othadd.ozi.common.HOME_CHAT_ITEM
+import com.othadd.ozi.common.THIS_USER_AVI
 import com.othadd.ozi.domain.model.chat.UiChat
 import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.ui.Avi
@@ -54,13 +58,18 @@ fun HomeScreenTopBar(
             verticalAlignment = Alignment.CenterVertically,
             modifier = modifier.fillMaxWidth()
         ) {
-            Avi(
-                fg = thisUser.aviFg,
-                bg = thisUser.aviBg,
+            Box(
                 modifier = Modifier
+                    .semantics { contentDescription = THIS_USER_AVI }
                     .clickable { onAviPressed() }
                     .size(60.dp)
-            )
+            ) {
+                Avi(
+                    fg = thisUser.aviFg,
+                    bg = thisUser.aviBg,
+                    sizeDp = 60
+                )
+            }
 
             Spacer(modifier = Modifier.width(16.dp))
 
@@ -100,7 +109,7 @@ fun PrevTopBar() {
     OziComposeTheme {
         HomeScreenTopBar(
             thisUser = testUser1,
-            onAviPressed = {  },
+            onAviPressed = { },
             onMenuButtonPressed = { },
             currentTheme = ThemeState.LIGHT,
             switchTheme = { },
@@ -113,9 +122,11 @@ fun PrevTopBar() {
 fun Chat(chat: UiChat, onClick: (userId: String) -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable { onClick(chat.chatId) }
+        modifier = Modifier
+            .semantics { contentDescription = "$HOME_CHAT_ITEM ${chat.chatName}" }
+            .clickable { onClick(chat.chatId) }
     ) {
-        Avi(fg = chat.aviFg, bg = chat.aviBg, modifier = Modifier.size(40.dp))
+        Avi(fg = chat.aviFg, bg = chat.aviBg, sizeDp = 40)
 
         Spacer(modifier = Modifier.width(8.dp))
 

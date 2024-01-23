@@ -161,7 +161,7 @@ private fun GroupGameSetupScreen_simple(
                 trailingIcon = { },
                 onClicked = {
                 },
-                modifier = Modifier.padding(horizontal = 16.dp)
+                padding = 16,
             )
 
             Spacer(modifier = Modifier.height(16.dp))

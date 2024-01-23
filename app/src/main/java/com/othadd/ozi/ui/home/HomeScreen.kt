@@ -2,6 +2,7 @@ package com.othadd.ozi.ui.home
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
@@ -16,8 +17,11 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -31,20 +35,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.othadd.ozi.common.HOME_MENU
+import com.othadd.ozi.common.HOME_SCREEN
 import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.domain.model.chat.UiChat
+import com.othadd.ozi.testPairChats1
+import com.othadd.ozi.testUser1
 import com.othadd.ozi.ui.Menu
 import com.othadd.ozi.ui.ThemeState
 import com.othadd.ozi.ui.model.Destination
 import com.othadd.ozi.ui.model.MenuData
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.ozi.testPairChats1
-import com.othadd.ozi.testUser1
+import com.othadd.ozi.ui.theme.OziNavyBlue_dark
+import com.othadd.ozi.ui.theme.OziSkyBlue_dark
 import com.othadd.oziX.R
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -59,27 +69,36 @@ fun HomeScreen(
     goToGroupGameSetup: () -> Unit,
     logout: () -> Unit,
     currentTheme: ThemeState,
-    switchTheme: () -> Unit
+    switchTheme: () -> Unit,
+    setUiReady: () -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val viewmodel: HomeViewmodel = hiltViewModel()
-    val uiState by viewmodel.uiState.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    if(uiState.thisUser != null) {
-        HomeScreen_simple(
-            thisUser = uiState.thisUser!!,
-            chats = uiState.chats,
-            startChat = onChatClick,
-            goToGroupGameSetup = goToGroupGameSetup,
-            logout = logout,
-            goToProfile = goToProfile,
-            goToDeveloper = goToDeveloper,
-            currentTheme = currentTheme,
-            switchTheme = switchTheme,
-            sortOutNotificationPermission = sortOutNotificationPermission,
-        )
-    } else {
-        LaunchedEffect(key1 = true) {
-            goToOnBoarding()
+    if (uiState != null) {
+
+        if (uiState!!.thisUser == null) {
+            LaunchedEffect(key1 = true) {
+                goToOnBoarding()
+            }
+        }
+        else {
+            LaunchedEffect(key1 = true) {
+                setUiReady()
+            }
+
+            HomeScreen_simple(
+                thisUser = uiState!!.thisUser!!,
+                chats = uiState!!.chats,
+                startChat = onChatClick,
+                goToGroupGameSetup = goToGroupGameSetup,
+                logout = logout,
+                goToProfile = goToProfile,
+                goToDeveloper = goToDeveloper,
+                currentTheme = currentTheme,
+                switchTheme = switchTheme,
+                sortOutNotificationPermission = sortOutNotificationPermission,
+            )
         }
     }
 
@@ -88,8 +107,8 @@ fun HomeScreen(
     }
 
     LaunchedEffect(key1 = true) {
-        viewmodel.clearEmptyChats()
-        viewmodel.refreshThisUser()
+        viewModel.clearEmptyChats()
+        viewModel.refreshThisUser()
     }
 }
 
@@ -130,7 +149,8 @@ private fun HomeScreen_simple(
     }
 
     Surface(
-        color = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.background,
+        modifier = Modifier.semantics { contentDescription = HOME_SCREEN }
     ) {
         Box {
             Column(
@@ -204,6 +224,7 @@ private fun HomeScreen_simple(
             ) {
                 Box(
                     modifier = Modifier
+                        .semantics { contentDescription = HOME_MENU }
                         .fillMaxSize()
                         .clickable(
                             onClick = { showMenu = false },
@@ -223,7 +244,7 @@ private fun HomeScreen_simple(
         }
     }
 
-    LaunchedEffect(key1 = true){
+    LaunchedEffect(key1 = true) {
         sortOutNotificationPermission()
     }
 }
@@ -238,13 +259,13 @@ fun PrevHome() {
             chats = testPairChats1,
 //            chats = emptyList(),
             startChat = { },
-            goToGroupGameSetup = {  },
-            logout = {  },
-            goToProfile = {  },
-            goToDeveloper = {  },
+            goToGroupGameSetup = { },
+            logout = { },
+            goToProfile = { },
+            goToDeveloper = { },
             currentTheme = ThemeState.LIGHT,
-            switchTheme = {  },
-            sortOutNotificationPermission = {  }
+            switchTheme = { },
+            sortOutNotificationPermission = { }
         )
     }
 }

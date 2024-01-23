@@ -55,6 +55,7 @@ fun LandingScreen(
     goToRegister: () -> Unit,
     goToLogin: () -> Unit,
     goToHome: () -> Unit,
+    setUiReady: () -> Unit,
     exitApp: () -> Unit
 ) {
     val viewmodel: OnBoardingViewModel = hiltViewModel()
@@ -72,6 +73,7 @@ fun LandingScreen(
 
     LaunchedEffect(key1 = true){
         updateCurrentDestination(Destination.ONBOARDING.route)
+        setUiReady()
     }
 }
 
