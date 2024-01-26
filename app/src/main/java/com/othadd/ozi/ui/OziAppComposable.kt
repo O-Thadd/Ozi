@@ -40,14 +40,14 @@ import androidx.navigation.navDeepLink
 import com.othadd.ozi.common.BOTTOM_BAR_EXPLORE_BUTTON
 import com.othadd.ozi.common.BOTTOM_BAR_HOME_BUTTON
 import com.othadd.ozi.common.OZI_APP_URI
-import com.othadd.ozi.ui.chat.CHAT_ID_KEY
-import com.othadd.ozi.ui.chat.ChatScreen
-import com.othadd.ozi.ui.explore.ExploreScreen
-import com.othadd.ozi.ui.groupGameSetup.GroupGameSetupScreen
-import com.othadd.ozi.ui.home.HomeScreen
+import com.othadd.ozi.ui.chatScreen.CHAT_ID_KEY
+import com.othadd.ozi.ui.chatScreen.ChatScreen
+import com.othadd.ozi.ui.exploreScreen.ExploreScreen
+import com.othadd.ozi.ui.groupGameSetupScreen.GroupGameSetupScreen
+import com.othadd.ozi.ui.homeScreen.HomeScreen
 import com.othadd.ozi.ui.model.Destination
 import com.othadd.ozi.ui.onboarding.onBoardingGraph
-import com.othadd.ozi.ui.profile.ProfileScreen
+import com.othadd.ozi.ui.profileScreen.ProfileScreen
 import com.othadd.ozi.ui.theme.OziComposeTheme
 import com.othadd.oziX.R
 
@@ -75,99 +75,105 @@ fun OziApp(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-            Box(
-                modifier = Modifier.fillMaxSize()
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            NavHost(
+                navController = navController,
+                startDestination = Destination.HOME.route,
+                enterTransition = { slideInHorizontally { fullWidth -> fullWidth } },
+                exitTransition = { slideOutHorizontally { fullWidth -> -fullWidth } },
+                popEnterTransition = { slideInHorizontally { fullWidth -> -fullWidth } },
+                popExitTransition = { slideOutHorizontally { fullWidth -> fullWidth } }
             ) {
-                NavHost(
+
+                onBoardingGraph(
                     navController = navController,
-                    startDestination = Destination.HOME.route,
-                    enterTransition = { slideInHorizontally { fullWidth -> fullWidth } },
-                    exitTransition = { slideOutHorizontally { fullWidth -> -fullWidth } },
-                    popEnterTransition = { slideInHorizontally { fullWidth -> -fullWidth } },
-                    popExitTransition = { slideOutHorizontally { fullWidth -> fullWidth } }
-                ) {
+                    updateCurrentDestination = updateCurrentDestination,
+                    setUiReady = setUiReady,
+                    exitApp = exitApp
+                )
 
-                    onBoardingGraph(
-                        navController = navController,
+                composable(Destination.HOME.route) {
+                    HomeScreen(
+                        onChatClick = {
+                            navController.navigate("${Destination.CHAT.route}/$it")
+                        },
+                        goToOnBoarding = { navController.navigate(Destination.ONBOARDING.route) },
                         updateCurrentDestination = updateCurrentDestination,
-                        setUiReady = setUiReady,
-                        exitApp = exitApp
+                        goToGroupGameSetup = { navController.navigate(Destination.GROUP_GAME_SETUP.route) },
+                        logout = { mainActivityViewModel.confirmLogout() },
+                        goToProfile = {
+                            updateCurrentDestination(Destination.PROFILE.route)
+                            navController.navigate(Destination.PROFILE.route)
+                        },
+                        goToDeveloper = {
+                            updateCurrentDestination(Destination.DEVELOPER.route)
+                            navController.navigate(Destination.DEVELOPER.route)
+                        },
+                        currentTheme = if (appIuState?.appState?.darkTheme == true) ThemeState.DARK else ThemeState.LIGHT,
+                        switchTheme = switchTheme,
+                        sortOutNotificationPermission = sortOutNotificationPermission,
+                        setUiReady = setUiReady
                     )
+                }
 
-                    composable(Destination.HOME.route) {
-                        HomeScreen(
-                            onChatClick = {
-                                navController.navigate("${Destination.CHAT.route}/$it")
-                            },
-                            goToOnBoarding = { navController.navigate(Destination.ONBOARDING.route) },
-                            updateCurrentDestination = updateCurrentDestination,
-                            goToGroupGameSetup = { navController.navigate(Destination.GROUP_GAME_SETUP.route) },
-                            logout = { mainActivityViewModel.confirmLogout() },
-                            goToProfile = {
-                                updateCurrentDestination(Destination.PROFILE.route)
-                                navController.navigate(Destination.PROFILE.route)
-                            },
-                            goToDeveloper = {
-                                updateCurrentDestination(Destination.DEVELOPER.route)
-                                navController.navigate(Destination.DEVELOPER.route)
-                            },
-                            currentTheme = if(appIuState?.appState?.darkTheme == true) ThemeState.DARK else ThemeState.LIGHT,
-                            switchTheme = switchTheme,
-                            sortOutNotificationPermission = sortOutNotificationPermission,
-                            setUiReady = setUiReady
-                        )
-                    }
+                composable(
+                    route = "${Destination.CHAT.route}/{$CHAT_ID_KEY}",
+                    deepLinks = listOf(navDeepLink { uriPattern = "$OZI_APP_URI/{$CHAT_ID_KEY}" })
+                ) {
+                    ChatScreen(
+                        updateCurrentDestination = updateCurrentDestination,
+                        confirmSendGameRequest = { ids, chatmateName ->
+                            mainActivityViewModel.confirmSendGameRequest(ids, chatmateName)
+                        },
+                        gameModeratorId = appIuState?.appState?.gameModeratorId,
+                        goBack = { navController.popBackStack() },
+                        setUiReady = setUiReady
+                    )
+                }
 
-                    composable(
-                        route = "${Destination.CHAT.route}/{$CHAT_ID_KEY}",
-                        deepLinks = listOf(navDeepLink { uriPattern = "$OZI_APP_URI/{$CHAT_ID_KEY}" })
-                    ) {
-                        ChatScreen(
-                            updateCurrentDestination = updateCurrentDestination,
-                            confirmSendGameRequest = { ids, chatmateName ->
-                                mainActivityViewModel.confirmSendGameRequest(ids, chatmateName)
-                            },
-                            gameModeratorId = appIuState?.appState?.gameModeratorId,
-                            goBack = { navController.popBackStack() }
-                        )
-                    }
-
-                    composable(Destination.EXPLORE.route) {
-                        ExploreScreen(
-                            onUserClicked = {
-                                runOnUiThread {
-                                    navController.navigate("${Destination.CHAT.route}/$it") {
-                                        popUpTo(Destination.HOME.route)
-                                    }
+                composable(Destination.EXPLORE.route) {
+                    ExploreScreen(
+                        onUserClicked = {
+                            runOnUiThread {
+                                navController.navigate("${Destination.CHAT.route}/$it") {
+                                    popUpTo(Destination.HOME.route)
                                 }
-                            },
-                            onBackClicked = { navController.popBackStack() },
-                            updateCurrentDestination = updateCurrentDestination,
-                        )
-                    }
+                            }
+                        },
+                        onBackClicked = { navController.popBackStack() },
+                        updateCurrentDestination = updateCurrentDestination,
+                        setUiReady = setUiReady
+                    )
+                }
 
-                    composable(Destination.GROUP_GAME_SETUP.route){
-                        GroupGameSetupScreen(
-                            onBackClicked = { navController.popBackStack() },
-                            updateCurrentDestination = updateCurrentDestination,
-                            postDialog = { mainActivityViewModel.postDialog(it) },
-                            postNotifyDialog = { mainActivityViewModel.postNotifyDialog(it) }
-                        )
-                    }
+                composable(Destination.GROUP_GAME_SETUP.route) {
+                    GroupGameSetupScreen(
+                        onBackClicked = { navController.popBackStack() },
+                        updateCurrentDestination = updateCurrentDestination,
+                        postDialog = { mainActivityViewModel.postDialog(it) },
+                        postNotifyDialog = { mainActivityViewModel.postNotifyDialog(it) },
+                        setUiReady = setUiReady
+                    )
+                }
 
-                    composable(
-                        route = Destination.PROFILE.route
-                    ){
-                        ProfileScreen(
-                            goBack = { navController.popBackStack() }
-                        )
-                    }
+                composable(
+                    route = Destination.PROFILE.route
+                ) {
+                    ProfileScreen(
+                        goBack = { navController.popBackStack() },
+                        setUiReady = setUiReady
+                    )
+                }
 
-                    composable(Destination.DEVELOPER.route){
-                        DevScreen { navController.popBackStack() }
-                    }
+                composable(Destination.DEVELOPER.route) {
+                    DevScreen(
+                        setUiReady = setUiReady
+                    ) { navController.popBackStack() }
                 }
             }
+        }
 
         AnimatedVisibility(
             visible = appIuState?.dialog != null || gameDialog != null,

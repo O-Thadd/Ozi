@@ -8,7 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.RemoteInput
 import com.othadd.ozi.common.NOTIFICATION_REPLY_TEXT_KEY
 import com.othadd.ozi.domain.useCases.interfaces.NotificationUseCases
-import com.othadd.ozi.ui.chat.CHAT_ID_KEY
+import com.othadd.ozi.ui.chatScreen.CHAT_ID_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -9,7 +9,7 @@ import com.othadd.ozi.domain.model.OperationOutcome
 import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.domain.model.message.Message
 import com.othadd.ozi.domain.repos.UsersRepo
-import com.othadd.ozi.domain.useCases.implementations.DateTimeFormatType
+import com.othadd.ozi.domain.useCases.defaultImplementations.DateTimeFormatType
 import com.othadd.ozi.domain.useCases.interfaces.GetFormattedDateTimeUseCase
 
 @Entity(tableName = "chats")

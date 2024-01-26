@@ -20,7 +20,7 @@ interface MessageRepo {
     suspend fun deleteAll()
 
     /**
-     * Syncs all local message with provided chatId with server. Adding, updating and deleting as appropriate.
+     * Syncs all local message with server using the provided chatId . Adding, updating and deleting as appropriate.
      *
      * @return: list of new messages i.e. messages that did not previously exist locally.
      */

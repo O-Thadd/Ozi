@@ -2,6 +2,7 @@ package com.othadd.ozi.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
@@ -501,6 +502,8 @@ fun AviChooserDialog(
 ) {
     var selectedFg by remember { mutableIntStateOf(-1) }
     var selectedBg by remember { mutableIntStateOf(-1) }
+
+    BackHandler { onClose() }
 
     Surface(
         shape = RoundedCornerShape(16.dp),

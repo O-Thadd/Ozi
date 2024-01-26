@@ -25,6 +25,7 @@ const val NOTIFICATION_REPLY_TEXT_KEY = "notification_reply_text_key"
 
 const val GROUP_CHAT_NAME = "Game Chat"
 const val GAME_MODERATOR_SENDER_ID = "game_moderator_sender_id"
+const val SYSTEM_SENDER_ID = "id for system as message sender"
 const val GAME_REQUEST_TIMEOUT_DURATION_MILLIS = 46_000L
 
 const val NO_VALUE_SET = "no_value_set"

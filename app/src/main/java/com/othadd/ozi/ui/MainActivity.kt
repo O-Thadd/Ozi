@@ -107,10 +107,7 @@ class MainActivity : ComponentActivity() {
                         sortOutNotificationPermission = { sortOutNotificationPermissionFromHome() },
                         runOnUiThread = myRunOnUiThread,
                         exitApp = { finish() },
-                        setUiReady = {
-                            Log.e("observexx", "splash condition update called")
-                            mainActivityViewModel.setUiReady()
-                        }
+                        setUiReady = { mainActivityViewModel.setUiReady() }
                     )
                 }
             }

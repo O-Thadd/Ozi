@@ -10,7 +10,7 @@ import com.othadd.ozi.domain.model.message.ChatItemType
 import com.othadd.ozi.domain.model.message.MessageSender
 import com.othadd.ozi.domain.model.message.TimeStamp
 import com.othadd.ozi.domain.model.message.UIMessage
-import com.othadd.ozi.ui.chat.ChatUiState
+import com.othadd.ozi.ui.chatScreen.ChatUiState
 import com.othadd.ozi.ui.model.DialogData
 import com.othadd.ozi.ui.model.GamePrepDialogData
 import com.othadd.ozi.ui.model.MenuData

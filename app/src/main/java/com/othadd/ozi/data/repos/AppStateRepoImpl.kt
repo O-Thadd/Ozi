@@ -16,7 +16,8 @@ class AppStateRepoImpl @Inject constructor(private val dataStore: OziDataStore) 
     override suspend fun incrementAppStartCount() {
         val initialStateString = dataStore.getAppState().first()
         val initialState = gson.fromJson(initialStateString, AppState::class.java)
-        val updatedState = initialState.copy(appStartsCount = initialState.appStartsCount + 1, inForeground = true)
+        val updatedState =
+            initialState.copy(appStartsCount = initialState.appStartsCount + 1, inForeground = true)
         dataStore.updateAppState(gson.toJson(updatedState))
     }
 
