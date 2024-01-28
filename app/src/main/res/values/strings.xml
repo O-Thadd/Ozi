@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ozi Compose</string>
+    <string name="app_name">Ozi</string>
 
 <!--    <string name="confirm_send_game_request">Send Game request to %1s ?</string>-->
 <!--    <string name="game_request_response_countdown">Game request has been sent.\n%1s has %2ds to respond.</string>-->

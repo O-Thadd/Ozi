@@ -14,7 +14,7 @@ import com.othadd.ozi.ui.chatScreen.ChatUiState
 import com.othadd.ozi.ui.model.DialogData
 import com.othadd.ozi.ui.model.GamePrepDialogData
 import com.othadd.ozi.ui.model.MenuData
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 
 val testUser1 = User(
     username = "Mr. State",

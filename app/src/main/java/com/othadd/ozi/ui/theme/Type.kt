@@ -5,7 +5,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 
 val regularFont = FontFamily(Font(R.font.eras_medium))
 val lightFont = FontFamily(Font(R.font.eras_good_normal))

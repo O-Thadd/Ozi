@@ -99,7 +99,7 @@ import com.othadd.ozi.ui.theme.OziAviGreenBG_light
 import com.othadd.ozi.ui.theme.OziAviRedBG_dark
 import com.othadd.ozi.ui.theme.OziAviRedBG_light
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 import java.util.Calendar
 import kotlin.math.roundToInt
 
@@ -112,9 +112,11 @@ fun Avi(
     Surface(
         color = getAviBGColor(bg),
         shape = CircleShape,
-        modifier = Modifier.size(sizeDp.dp)
     ) {
-        Box {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.size(sizeDp.dp)
+        ) {
             if (fg != -1) {
                 Image(
                     painter = getAviFGPainter(fg),
@@ -138,7 +140,7 @@ fun Avi(
 @Composable
 fun PrevAvi() {
     OziComposeTheme(darkTheme = true) {
-        Avi(-1, -1, 80)
+        Avi(200,-1, 80)
     }
 }
 
@@ -296,7 +298,7 @@ fun MoonImage() {
     )
 }
 
-@Preview(showBackground = true, widthDp = 206, uiMode = UI_MODE_NIGHT_NO)
+//@Preview(showBackground = true, widthDp = 206, uiMode = UI_MODE_NIGHT_NO)
 @Composable
 fun PrevThemeSwitch() {
     OziComposeTheme {
@@ -382,7 +384,7 @@ fun OziTextField(
     }
 }
 
-@Preview
+//@Preview
 @Composable
 fun PrevOziTextField() {
     OziComposeTheme {
@@ -457,7 +459,7 @@ fun OnBoardingTextField(
     )
 }
 
-@Preview(showBackground = true, widthDp = 412)
+//@Preview(showBackground = true, widthDp = 412)
 @Composable
 fun PrevOnboardingTextField() {
     OziComposeTheme {
@@ -748,7 +750,7 @@ fun Dialog(
     }
 }
 
-@Preview(uiMode = UI_MODE_NIGHT_YES)
+//@Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun PrevDialog() {
     OziComposeTheme {
@@ -871,7 +873,7 @@ fun User1(
     }
 }
 
-//@Preview(showBackground = true, widthDp = 412)
+@Preview(showBackground = true, widthDp = 412)
 @Composable
 fun PrevUser1() {
     OziComposeTheme {
@@ -928,7 +930,7 @@ fun User2(
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun PrevUser2() {
     OziComposeTheme {
@@ -992,6 +994,15 @@ fun GamePrepDialog(
             Column(
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
+
+                if (!thisUserIsHost) {
+                    Text(
+                        text = "Game Challenge",
+                        modifier = Modifier.padding(horizontal = padding.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
 
                 Text(
                     text = "Brokering game...",

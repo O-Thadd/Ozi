@@ -47,7 +47,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.othadd.ozi.ui.model.Destination
 import com.othadd.ozi.ui.onboarding.OnBoardingViewModel
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 
 @Composable
 fun LandingScreen(

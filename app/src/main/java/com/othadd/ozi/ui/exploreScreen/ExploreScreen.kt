@@ -45,7 +45,7 @@ import com.othadd.ozi.domain.model.User
 import com.othadd.ozi.ui.TopBar
 import com.othadd.ozi.ui.model.Destination
 import com.othadd.ozi.testUsernames
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 import kotlinx.coroutines.launch
 
 @Composable

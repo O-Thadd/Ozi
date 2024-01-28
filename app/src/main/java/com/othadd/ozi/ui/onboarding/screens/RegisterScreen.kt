@@ -53,7 +53,7 @@ import com.othadd.ozi.ui.OnBoardingTextField
 import com.othadd.ozi.ui.onboarding.OnBoardingOpStatus
 import com.othadd.ozi.ui.onboarding.OnBoardingViewModel
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 
 @Composable
 fun RegisterScreen(

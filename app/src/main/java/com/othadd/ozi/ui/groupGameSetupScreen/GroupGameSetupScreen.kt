@@ -55,7 +55,7 @@ import com.othadd.ozi.ui.theme.OziComposeTheme
 import com.othadd.ozi.testUser2
 import com.othadd.ozi.testUser3
 import com.othadd.ozi.testUsers1
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 import kotlinx.coroutines.launch
 
 @Composable

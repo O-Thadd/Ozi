@@ -35,7 +35,7 @@ import com.othadd.ozi.ui.MainActivity
 import com.othadd.ozi.ui.chatScreen.CHAT_ID_KEY
 import com.othadd.ozi.ui.getBgResourceId
 import com.othadd.ozi.ui.getFgResourceId
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 

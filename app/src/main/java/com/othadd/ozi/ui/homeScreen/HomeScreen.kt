@@ -49,7 +49,7 @@ import com.othadd.ozi.ui.ThemeState
 import com.othadd.ozi.ui.model.Destination
 import com.othadd.ozi.ui.model.MenuData
 import com.othadd.ozi.ui.theme.OziComposeTheme
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable

@@ -46,7 +46,7 @@ import com.othadd.ozi.ui.AviChooserDialog
 import com.othadd.ozi.ui.TopBar
 import com.othadd.ozi.ui.theme.OziComposeTheme
 import com.othadd.ozi.testUser5
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 
 @Composable
 fun ProfileScreen(

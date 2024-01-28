@@ -8,15 +8,15 @@ plugins {
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    namespace 'com.othadd.oziX'
+    namespace 'com.othadd.ozi'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.othadd.oziX"
+        applicationId "com.othadd.ozi"
         minSdk 24
         targetSdk 33
-        versionCode 3
-        versionName "1.0"
+        versionCode 7
+        versionName "2.0"
 
         testInstrumentationRunner "com.othadd.ozi.e2e.utils.CustomTestRunner"
         vectorDrawables {

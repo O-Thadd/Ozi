@@ -62,7 +62,7 @@ import com.othadd.ozi.message1
 import com.othadd.ozi.ui.theme.OziComposeTheme
 import com.othadd.ozi.ui.model.Destination
 import com.othadd.ozi.testUIChat
-import com.othadd.oziX.R
+import com.othadd.ozi.R
 import kotlinx.coroutines.launch
 
 
