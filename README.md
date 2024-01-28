@@ -1,3 +1,6 @@
+![landing](https://github.com/O-Thadd/Ozi-Compose/assets/66256864/ecde0086-c223-40b7-8ba0-d33d3f042501)
+
+
 # Ozi
 Ozi is an Android app built entirely with Kotlin and Jetpack Compose. It follows Android design and development best practices and is intended to show my skill as an Android Developer.
 
