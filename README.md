@@ -1,13 +1,19 @@
 ![landing](https://github.com/O-Thadd/Ozi-Compose/assets/66256864/ecde0086-c223-40b7-8ba0-d33d3f042501)
 
+<a href="https://play.google.com/store/apps/details?id=com.othadd.ozi&pcampaignid=web_share"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70"></a>
+
+
 
 # Ozi
 Ozi is an Android app built entirely with Kotlin and Jetpack Compose. It follows Android design and development best practices and is intended to show my skill as an Android Developer.
 
-The app will continue to be developed. Features and best-practices will be implemented in a reasonable and useful fashion in order to actually improve the app as well as showcase my skill and knowledge as I improve. Updates will be regularly pushed here. Stable variant is available on the Play Store. [link]
+The app will continue to be developed. Features and best-practices will be implemented in a reasonable and useful fashion in order to actually improve the app as well as showcase my skill and knowledge as I improve. Updates will be regularly pushed here. Most recent stable state is available on the [Play Store](https://play.google.com/store/apps/details?id=com.othadd.ozi&pcampaignid=web_share).
 
 # Features
 Ozi is a simple chat app. Users choose a unique username, password and an avi-icon from a provided set. Users can search for other users of Ozi; a list of suggested users is also provided. Users can also play a speed-typing game; both with chat-mates and in groups of up to 5 players. Light and dark themes are supported.
+
+# Screenshots
+![group screenshot](https://github.com/O-Thadd/Ozi-Compose/assets/66256864/ce8e763d-5b04-416d-a001-f2c9d2096001)
 
 # Development Environment
 Ozi uses the Gradle build system and can be imported directly into Android Studio.
@@ -16,14 +22,21 @@ There will be errors where references are made to secret objects, such as the UR
 # Architecture
 Ozi follows the [official architecture guidance](https://developer.android.com/topic/architecture). Notably, it is a single-module app. I do not think the app is yet large or complex enough to benefit from the advantages of multi-modular architecture.
 The app architecture has three layers: a data layer, a domain layer and a UI layer.
+
+<center>
+<img src="https://github.com/O-Thadd/Ozi-Compose/assets/66256864/fd2ab676-4984-41ae-bc44-4389685938de" width="600px" alt="Architecture overview" />
+</center>
+
 The architecture follows a reactive programming model with unidirectional data flow. With the data layer at the bottom, the key concepts are:
 -	Higher layers react to changes in lower layers.
 -	Events flow down.
 -	Data flows up.
 -	The data flow is achieved using streams, implemented using Kotlin Flows.
 
-## Example: Displaying Chats on the Home Screen
-Chats are shown to the user when the home screen is opened. The following are events take place to achieve this.
+### Example: Displaying Chats on the Home Screen
+Chats are shown to the user when the home screen is opened. The following are events take place to achieve this, and an illustrative diagram.
+![homescreen flow](https://github.com/O-Thadd/Ozi-Compose/assets/66256864/89bf984e-319f-4aac-bd0c-1e53b29975af)
+
 -	`HomeViewModel` calls 1GetChatsUseCase` to obtain a stream of ui-chats
 -	`GetChatsUseCase` gets this stream of ui-chats by combining streams of data from the users repository, message repository and chat repository
 -	The repositories all rely on a local Room database through APIs exposed in the `UserDao`, `MessageDao` and `ChatDao` respectively which they depend on respectively.
@@ -70,6 +83,8 @@ The UI layer comprises:
 - Android ViewModels
 
 The ViewModels receive streams of data from use cases and repositories, and transforms them into UI state. The UI elements reflect this state, and provide ways for the user to interact with the app.
+![architecture ui](https://github.com/O-Thadd/Ozi-Compose/assets/66256864/0211a7f6-d0ff-4ff2-855d-642683286d20)
+
 
 ### Modeling UI state
 UI state is modeled as immutable data classes. State objects are only ever emitted through the transform of data streams. This approach ensures that:
