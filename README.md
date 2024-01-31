@@ -17,7 +17,7 @@ Ozi is a simple chat app. Users choose a unique username, password and an avi-ic
 
 # Development Environment
 Ozi uses the Gradle build system and can be imported directly into Android Studio.
-There will be errors where references are made to secret objects, such as the URL to the backend server, service account credentials, etc.
+Configure prerequisites (backend url, service account credential) if any errors.
 
 # Architecture
 Ozi follows the [official architecture guidance](https://developer.android.com/topic/architecture). Notably, it is a single-module app. I do not think the app is yet large or complex enough to benefit from the advantages of multi-modular architecture.
@@ -37,7 +37,7 @@ The architecture follows a reactive programming model with unidirectional data f
 Chats are shown to the user when the home screen is opened. The following are events take place to achieve this, and an illustrative diagram.
 ![homescreen flow](https://github.com/O-Thadd/Ozi-Compose/assets/66256864/89bf984e-319f-4aac-bd0c-1e53b29975af)
 
--	`HomeViewModel` calls 1GetChatsUseCase` to obtain a stream of ui-chats
+-	`HomeViewModel` calls `GetChatsUseCase` to obtain a stream of ui-chats
 -	`GetChatsUseCase` gets this stream of ui-chats by combining streams of data from the users repository, message repository and chat repository
 -	The repositories all rely on a local Room database through APIs exposed in the `UserDao`, `MessageDao` and `ChatDao` respectively which they depend on respectively.
 -	Data changes to chats, messages or users in the database is emitted into the streams that the DAOs provide to the repositories, and that in turn is provided to the `GetChatsUseCase`.
