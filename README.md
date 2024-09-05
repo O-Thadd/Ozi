@@ -2,6 +2,8 @@
 
 <a href="https://play.google.com/store/apps/details?id=com.othadd.ozi&pcampaignid=web_share"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70"></a>
 
+[Download APK here](https://firebasestorage.googleapis.com/v0/b/thadd-dev-realm.appspot.com/o/ozi.apk?alt=media&token=67d8a7b6-9e11-43f7-b3ea-bab9261c139c)
+
 
 
 # Ozi
