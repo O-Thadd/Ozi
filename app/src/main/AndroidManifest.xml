@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
-        android:name="com.othadd.ozi.OziApplication"
+        android:name="com.iyke.ozix.OziApplication"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,7 +20,7 @@
         >
 
         <activity
-            android:name="com.othadd.ozi.ui.MainActivity"
+            android:name="com.iyke.ozix.ui.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="sensorPortrait"
@@ -41,18 +43,18 @@
             tools:node="remove">
         </provider>
 
-        <service
-            android:name="com.othadd.ozi.domain.MyFirebaseMessagingService"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+<!--        <service-->
+<!--            android:name="com.iyke.ozix.domain.MyFirebaseMessagingService"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="false">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+<!--            </intent-filter>-->
+<!--        </service>-->
 
         <!-- If this receiver listens for broadcasts sent from the system or from
      other apps, even other apps that you own, set android:exported to "true". -->
-        <receiver android:name="com.othadd.ozi.domain.OziReceiver" android:exported="false">
+        <receiver android:name="com.iyke.ozix.domain.OziReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="APP_SPECIFIC_BROADCAST" />
             </intent-filter>
@@ -62,9 +64,9 @@
 Set custom default icon. This is used when no icon is set for incoming notification messages.
 See README(https://goo.gl/l4GJaQ) for more.
 -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_app_icon" />
+<!--        <meta-data-->
+<!--            android:name="com.google.firebase.messaging.default_notification_icon"-->
+<!--            android:resource="@drawable/ic_app_icon" />-->
     </application>
 
 </manifest>

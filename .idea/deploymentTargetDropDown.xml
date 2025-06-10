@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="deploymentTargetDropDown">
-    <runningDeviceTargetsSelectedWithDialog>
-      <Target>
-        <type value="RUNNING_DEVICE_TARGET" />
-        <deviceKey>
-          <Key>
-            <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="I:\AndroidStudio\.android\avd\Pixel_6_Pro_API_28.avd" />
-          </Key>
-        </deviceKey>
-      </Target>
-    </runningDeviceTargetsSelectedWithDialog>
+    <value>
+      <entry key="ChatsScreenTest">
+        <State />
+      </entry>
+      <entry key="LoginFlow">
+        <State />
+      </entry>
+      <entry key="SendMessageFlow">
+        <State />
+      </entry>
+      <entry key="SignUpFlow">
+        <State />
+      </entry>
+      <entry key="app">
+        <State />
+      </entry>
+      <entry key="login()">
+        <State />
+      </entry>
+    </value>
   </component>
 </project>

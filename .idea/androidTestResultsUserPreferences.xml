@@ -44,6 +44,19 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-1734278910">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_6_Pro_API_33" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-1437977874">
           <value>
             <AndroidTestResultsTableState>
@@ -65,6 +78,21 @@
                   <entry key="Duration" value="90" />
                   <entry key="Tests" value="360" />
                   <entry key="samsung SM-N9500" value="120" />
+                  <entry key="samsung SM-N975U" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="-1202370534">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_6_Pro_API_33" value="120" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung SM-N975U" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
@@ -96,6 +124,19 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-728287767">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_6_Pro_API_33" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-694910969">
           <value>
             <AndroidTestResultsTableState>
@@ -104,6 +145,7 @@
                   <entry key="Duration" value="90" />
                   <entry key="Tests" value="360" />
                   <entry key="samsung SM-N9500" value="120" />
+                  <entry key="samsung SM-N975U" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
@@ -117,6 +159,7 @@
                   <entry key="Duration" value="90" />
                   <entry key="Tests" value="360" />
                   <entry key="samsung SM-N9500" value="120" />
+                  <entry key="samsung SM-N975U" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
@@ -261,6 +304,32 @@
                   <entry key="Duration" value="90" />
                   <entry key="Tests" value="360" />
                   <entry key="samsung SM-N9500" value="120" />
+                  <entry key="samsung SM-N975U" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="1692404631">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung SM-N975U" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="1800970703">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
                   <entry key="samsung SM-N975U" value="120" />
                 </map>
               </option>

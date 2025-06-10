@@ -5,20 +5,18 @@ plugins {
     id 'com.google.dagger.hilt.android'
 }
 
-apply plugin: 'com.google.gms.google-services'
-
 android {
-    namespace 'com.othadd.ozi'
-    compileSdk 34
+    namespace 'com.iyke.ozix'
+    compileSdk 35
 
     defaultConfig {
-        applicationId "com.othadd.ozi"
+        applicationId "com.iyke.ozix"
         minSdk 24
-        targetSdk 33
-        versionCode 7
-        versionName "2.0"
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
 
-        testInstrumentationRunner "com.othadd.ozi.e2e.utils.CustomTestRunner"
+        testInstrumentationRunner "com.iyke.ozix.e2e.utils.CustomTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -121,10 +119,10 @@ dependencies {
     // Preferences DataStore (SharedPreferences like APIs)
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    // Firebase
-    implementation platform('com.google.firebase:firebase-bom:30.0.1')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-messaging'
+//    // Firebase
+//    implementation platform('com.google.firebase:firebase-bom:30.0.1')
+//    implementation 'com.google.firebase:firebase-analytics-ktx'
+//    implementation 'com.google.firebase:firebase-messaging'
 
     // WorkManager
     def work_version = "2.8.1"
