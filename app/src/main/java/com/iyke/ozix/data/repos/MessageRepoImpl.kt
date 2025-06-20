@@ -74,7 +74,7 @@ class MessageRepoImpl @Inject constructor(
         val outcome = ApiCall<List<FromApiMessage>, List<Message>, OpError> {
             action { remoteService.getMessages(chatId = chatId) }
 
-            success { apiMessages ->
+            mapperOnSuccess { apiMessages ->
                 OperationOutcomeX.Successful(apiMessages.map { it.toMessage() })
             }
 
@@ -115,7 +115,7 @@ class MessageRepoImpl @Inject constructor(
                 ApiCall<List<FromApiMessage>, List<Message>, OpError> {
                     action { remoteService.getMessages(chatId = chatId) }
 
-                    success { apiMessages ->
+                    mapperOnSuccess { apiMessages ->
                         OperationOutcomeX.Successful(apiMessages.map { it.toMessage() })
                     }
 

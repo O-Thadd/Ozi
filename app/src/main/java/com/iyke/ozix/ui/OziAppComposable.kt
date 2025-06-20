@@ -230,16 +230,16 @@ fun OziApp(
             }
         }
 
-        Box(
-            modifier = Modifier.align(Alignment.BottomEnd)
-        ) {
-            FilledTonalButton(
-                onClick = mainActivityViewModel::syncAll,
-                modifier = Modifier.align(Alignment.BottomEnd)
-            ) {
-                Text("Sync all")
-            }
-        }
+//        Box(
+//            modifier = Modifier.align(Alignment.BottomEnd)
+//        ) {
+//            FilledTonalButton(
+//                onClick = mainActivityViewModel::syncAll,
+//                modifier = Modifier.align(Alignment.BottomEnd)
+//            ) {
+//                Text("Sync all")
+//            }
+//        }
     }
 
     LaunchedEffect(key1 = appIuState?.appState?.gameChatId) {

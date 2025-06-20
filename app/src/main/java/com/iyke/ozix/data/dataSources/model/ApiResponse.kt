@@ -70,7 +70,7 @@ class ApiCallRunnerBuilderScope<T, U, V: OpError> {
 
     fun action(action: suspend () -> OziResponse<T>) { actionX = action }
 
-    fun success(onSuccess: suspend (T) -> OperationOutcomeX.Successful<U>) { this.onSuccess = onSuccess }
+    fun mapperOnSuccess(onSuccess: suspend (T) -> OperationOutcomeX.Successful<U>) { this.onSuccess = onSuccess }
 
     fun failure(onFailure: (String) -> OperationOutcomeX.Failed<V>) { this.onFailure = onFailure }
 

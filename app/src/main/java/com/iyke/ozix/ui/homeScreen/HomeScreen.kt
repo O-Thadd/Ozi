@@ -139,8 +139,14 @@ private fun HomeScreen_simple(
             iconResourceId = R.drawable.ic_logout
         )
 
+        //debug
+        val ciInfoItem = MenuData(
+            name = "CI setup test 1",
+            action = { },
+        )
+
 //        listOf(groupGameMenuItem, developerMenuItem, logOutMenuItem)
-        listOf(logOutMenuItem)
+        listOf(logOutMenuItem, ciInfoItem)
     }
 
     Surface(

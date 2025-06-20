@@ -32,7 +32,7 @@ class ChatRepoImpl @Inject constructor(
         val outcome = ApiCall<List<ApiChat>, List<Chat>, OpError> {
             action { remoteService.getUserChats() }
 
-            success { apiChats -> OperationOutcomeX.Successful(apiChats.map { it.toChat() }) }
+            mapperOnSuccess { apiChats -> OperationOutcomeX.Successful(apiChats.map { it.toChat() }) }
 
             failure { OperationOutcomeX.Failed() }
         }

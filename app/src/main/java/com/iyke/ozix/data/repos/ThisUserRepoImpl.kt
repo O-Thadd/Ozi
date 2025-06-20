@@ -30,7 +30,7 @@ class ThisUserRepoImpl @Inject constructor(
 
         val opOutcome = ApiCall<FromApiUser, User, OpError> {
             action { remoteService.getUser(userId = thisUser.userId) }
-            success { OperationOutcomeX.Successful(it.toUser()) }
+            mapperOnSuccess { OperationOutcomeX.Successful(it.toUser()) }
             failure { OperationOutcomeX.Failed() }
         }
 
@@ -85,7 +85,7 @@ class ThisUserRepoImpl @Inject constructor(
                 remoteService.login(payload)
             }
 
-            success {
+            mapperOnSuccess {
                 dataStore.updateThisUser(it.toUser())
                 OperationOutcomeX.Successful()
             }

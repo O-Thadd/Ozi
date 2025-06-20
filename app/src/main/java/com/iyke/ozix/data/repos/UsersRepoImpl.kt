@@ -32,7 +32,7 @@ class UsersRepoImpl @Inject constructor(
 
                 val opOutcome = ApiCall<FromApiUser, User, OpError> {
                     action { remoteService.getUser(userId) }
-                    success { OperationOutcomeX.Successful(it.toUser()) }
+                    mapperOnSuccess { OperationOutcomeX.Successful(it.toUser()) }
                     failure { OperationOutcomeX.Failed() }
                 }
 
