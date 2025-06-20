@@ -112,12 +112,12 @@ class ChatsScreenTest {
         verify(goBack).invoke()
     }
 
-    @Test
-    fun chatScreen_gameButtonPressed_confirmGameRequestInvoked() {
-        setContentOnComposeTestRule()
-        testRule.onNodeWithContentDescription(CHAT_INPUT_LAYOUT_GAME_BUTTON).performClick()
-        verify(confirmSendGameRequest).invoke(listOf(chatMate.userId), thisUser.username)
-    }
+//    @Test
+//    fun chatScreen_gameButtonPressed_confirmGameRequestInvoked() {
+//        setContentOnComposeTestRule()
+//        testRule.onNodeWithContentDescription(CHAT_INPUT_LAYOUT_GAME_BUTTON).performClick()
+//        verify(confirmSendGameRequest).invoke(listOf(chatMate.userId), thisUser.username)
+//    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test

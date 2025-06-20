@@ -1,7 +1,9 @@
 package com.iyke.ozix.domain.useCases.user
 
+import com.iyke.ozix.data.dataSources.model.OpError
 import com.iyke.ozix.domain.model.DataSourcePreference
 import com.iyke.ozix.domain.model.OperationOutcome
+import com.iyke.ozix.domain.model.OperationOutcomeX
 import com.iyke.ozix.domain.model.User
 import com.iyke.ozix.domain.useCases.interfaces.user.GetUsersUseCases
 import com.iyke.ozix.testUser1
@@ -13,20 +15,20 @@ import kotlinx.coroutines.flow.flowOf
 class FakeGetUsersUseCases: GetUsersUseCases {
     private var networkError = false
     private val users = listOf(testUser1, testUser2, testUser3)
-    override suspend fun explore(): OperationOutcome<List<User>, Nothing> {
+    override suspend fun explore(): OperationOutcomeX<List<User>, OpError> {
         if (networkError){
-            return OperationOutcome.Failed()
+            return OperationOutcomeX.Failed()
         }
 
-        return OperationOutcome.Successful(users)
+        return OperationOutcomeX.Successful(users)
     }
 
-    override suspend fun search(searchTerm: String): OperationOutcome<List<User>, Nothing> {
+    override suspend fun search(searchTerm: String): OperationOutcomeX<List<User>, OpError> {
         if (networkError){
-            return OperationOutcome.Failed()
+            return OperationOutcomeX.Failed()
         }
 
-        return OperationOutcome.Successful(users)
+        return OperationOutcomeX.Successful(users)
     }
 
     override suspend fun getUserFlow(userId: String): Flow<User> {

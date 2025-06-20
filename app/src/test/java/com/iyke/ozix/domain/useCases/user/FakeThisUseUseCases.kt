@@ -1,25 +1,27 @@
 package com.iyke.ozix.domain.useCases.user
 
+import com.iyke.ozix.data.dataSources.model.OpError
 import com.iyke.ozix.domain.model.OperationOutcome
+import com.iyke.ozix.domain.model.OperationOutcomeX
 import com.iyke.ozix.domain.model.User
 import com.iyke.ozix.domain.useCases.interfaces.user.ThisUserUseCases
 import com.iyke.ozix.testUser1
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class FakeThisUseUseCases: ThisUserUseCases {
+class FakeThisUseUseCases(private var userToReturn: User?): ThisUserUseCases {
     private var networkError = false
 
     override fun get(): Flow<User?> {
-        return flowOf(testUser1)
+        return flowOf(userToReturn)
     }
 
-    override suspend fun refresh(): OperationOutcome<Nothing, Nothing> {
+    override suspend fun refresh(): OperationOutcomeX<Nothing, OpError> {
         return if (networkError){
-            OperationOutcome.Failed()
+            OperationOutcomeX.Failed()
         }
         else {
-            OperationOutcome.Successful()
+            OperationOutcomeX.Successful()
         }
     }
 
@@ -36,5 +38,9 @@ class FakeThisUseUseCases: ThisUserUseCases {
 
     fun setNetworkError(newValue: Boolean){
         networkError = newValue
+    }
+
+    fun setUserToReturn(user: User){
+        userToReturn = user
     }
 }

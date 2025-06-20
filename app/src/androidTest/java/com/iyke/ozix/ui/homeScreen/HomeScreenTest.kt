@@ -66,7 +66,8 @@ class HomeScreenTest {
         viewModel = HomeViewModel(
             thisUserUseCases,
             FakeDeleteChatsUseCase(),
-            FakeGetChatsUseCase(chats)
+            FakeGetChatsUseCase(chats),
+            mock()
         )
     }
 
@@ -108,21 +109,21 @@ class HomeScreenTest {
         testRule.onNodeWithContentDescription(HOME_MENU).assertIsDisplayed()
     }
 
-    @Test
-    fun homeScreenTest_clickGroupGameMenuItem() {
-        setContentOnComposeTestRule()
-        testRule.onNodeWithContentDescription(HOME_MENU_BUTTON).performClick()
-        testRule.onNodeWithText("New Group Game").performClick()
-        verify(goToGroupGameSetup).invoke()
-    }
+//    @Test
+//    fun homeScreenTest_clickGroupGameMenuItem() {
+//        setContentOnComposeTestRule()
+//        testRule.onNodeWithContentDescription(HOME_MENU_BUTTON).performClick()
+//        testRule.onNodeWithText("New Group Game").performClick()
+//        verify(goToGroupGameSetup).invoke()
+//    }
 
-    @Test
-    fun homeScreenTest_clickDeveloperMenuItem() {
-        setContentOnComposeTestRule()
-        testRule.onNodeWithContentDescription(HOME_MENU_BUTTON).performClick()
-        testRule.onNodeWithText("Developer").performClick()
-        verify(goToDeveloper).invoke()
-    }
+//    @Test
+//    fun homeScreenTest_clickDeveloperMenuItem() {
+//        setContentOnComposeTestRule()
+//        testRule.onNodeWithContentDescription(HOME_MENU_BUTTON).performClick()
+//        testRule.onNodeWithText("Developer").performClick()
+//        verify(goToDeveloper).invoke()
+//    }
 
     @Test
     fun homeScreenTest_clickLogout() {

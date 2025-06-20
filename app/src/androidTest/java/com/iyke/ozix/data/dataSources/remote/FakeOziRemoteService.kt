@@ -1,21 +1,26 @@
 package com.iyke.ozix.data.dataSources.remote
 
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.iyke.ozix.common.STATUS_FAILURE
-import com.iyke.ozix.common.STATUS_SUCCESS
-import com.iyke.ozix.data.dataSources.model.RemoteUsersRequestType
+import com.iyke.ozix.data.dataSources.model.ApiResponse
+import com.iyke.ozix.data.dataSources.model.CreateUserResponse
+import com.iyke.ozix.data.dataSources.model.LoginPayload
+import com.iyke.ozix.data.dataSources.model.OziResponse
+import com.iyke.ozix.data.dataSources.model.RegisterUserPayload
+import com.iyke.ozix.data.repos.SendMessageResponse
+import com.iyke.ozix.domain.model.FromApiUser
 import com.iyke.ozix.domain.model.Signal
+import com.iyke.ozix.domain.model.ToApiUser
 import com.iyke.ozix.domain.model.User
+import com.iyke.ozix.domain.model.chat.ApiChat
 import com.iyke.ozix.domain.model.chat.Chat
 import com.iyke.ozix.domain.model.chat.ChatDto
-import com.iyke.ozix.domain.model.gaming.UserGameState
-import com.iyke.ozix.domain.model.message.Message
 import com.iyke.ozix.domain.model.message.FromApiMessage
+import com.iyke.ozix.domain.model.message.Message
+import com.iyke.ozix.domain.model.message.ToApiMessage
 import com.iyke.ozix.testUser1
 import com.iyke.ozix.testUser2
 import com.iyke.ozix.testUser3
 import kotlinx.coroutines.delay
+import retrofit2.Response
 import java.util.UUID
 
 class FakeOziRemoteService : OziRemoteService {
@@ -26,105 +31,44 @@ class FakeOziRemoteService : OziRemoteService {
     private val messages = mutableListOf<FromApiMessage>()
     private val chats = mutableListOf<Chat>()
 
-    override suspend fun registerUser(
-        username: String,
-        password: String,
-        aviFg: Int,
-        aviBg: Int,
-        fcmToken: String
-    ): JsonObject {
+    override suspend fun registerUser(payload: RegisterUserPayload): OziResponse<CreateUserResponse> {
         delay(2_000)
-
-        if (networkError) {
-            throw Exception("fake network error")
-        }
-
-        val response = JsonObject()
-        if (failServerResponse || users.any { it.username == username }) {
-            response.addProperty("status", STATUS_FAILURE)
-        } else {
-            val userId = UUID.randomUUID().toString()
-            val userToken = "testUserToken"
-            response.addProperty("status", STATUS_SUCCESS)
-            response.addProperty("userId", userId)
-            response.addProperty("token", userToken)
-            users.add(
-                User(
-                    userId,
-                    username,
-                    aviFg,
-                    aviBg,
-                    true,
-                    false,
-                    userToken,
-                    UserGameState.AVAILABLE.string
-                )
-            )
-        }
-
-        return response
+        return CreateUserResponse(UUID.randomUUID().toString()).wrapInOziResponse()
     }
 
-    override suspend fun postToUser(data: String, token: String) {}
-
-    override suspend fun login(username: String, password: String, fcmToken: String): JsonObject {
+    override suspend fun updateUser(userId: String, user: ToApiUser): OziResponse<Unit> {
         delay(2_000)
-
-        if (networkError) {
-            throw Exception("fake network error")
-        }
-
-        val response = JsonObject()
-        if (failServerResponse) {
-            response.addProperty("status", STATUS_FAILURE)
-        } else {
-            val user = users.find { it.username == username } ?: User(
-                UUID.randomUUID().toString(),
-                username,
-                1,
-                1,
-                true,
-                false,
-                "testUserToken",
-                ""
-            )
-            response.addProperty("status", STATUS_SUCCESS)
-            response.addProperty("user", Gson().toJson(user))
-        }
-
-        return response
+        return Unit.wrapInOziResponse()
     }
 
-    override suspend fun getUsers(
-        requestType: String,
-        username: String?,
-        userId: String?
-    ): List<User> {
+    override suspend fun login(payload: LoginPayload): OziResponse<FromApiUser> {
         delay(2_000)
-        return when (RemoteUsersRequestType.getType(requestType)) {
-            RemoteUsersRequestType.SPECIFIC -> users.find { it.userId == userId }?.let { listOf(it) } ?: emptyList()
-            RemoteUsersRequestType.SUGGESTED -> users
-            RemoteUsersRequestType.SEARCH ->users.filter { it.username.lowercase().contains(username!!.lowercase()) }
-            null -> emptyList()
-        }
+        return FromApiUser("testusername", "testuserid", 1, 1,).wrapInOziResponse()
     }
 
-    override suspend fun sendMessage(messageJson: String, token: String) {
-        val message = Gson().fromJson(messageJson, Message::class.java)
-        messages.add(message.toMessageDto())
-        if (chats.none { it.chatId == message.chatId }){
-            chats.add(Chat(message.chatId, listOf(message.chatId.substring(0..40), message.chatId.substring(41)), false))
-        }
+    override suspend fun getAllUsers(): OziResponse<List<FromApiUser>> {
+        delay(2_000)
+        return users.map { it.toFromApiUser() }.wrapInOziResponse()
     }
 
-    override suspend fun getMessages(
-        chatId: String,
-        lastMessageTimestamp: Long?,
-        lastMessageId: String?,
-        token: String
-    ): List<FromApiMessage> {
+    override suspend fun searchUsers(username: String): OziResponse<List<FromApiUser>> {
         delay(2_000)
-        return messages.filter { it.chatId == chatId }
+        return users.filter { it.username.contains(username) }.map { it.toFromApiUser() }.wrapInOziResponse()
+    }
+
+    override suspend fun getUser(userId: String): OziResponse<FromApiUser> {
+        delay(2_000)
+        return (users.find { it.userId == userId } ?: testUser1).toFromApiUser().wrapInOziResponse()
+    }
+
+    override suspend fun sendMessage(message: ToApiMessage): OziResponse<SendMessageResponse> {
+        delay(2_000)
+        return SendMessageResponse(UUID.randomUUID().toString(), UUID.randomUUID().toString()).wrapInOziResponse()
+    }
+
+    override suspend fun getMessages(chatId: String): OziResponse<List<FromApiMessage>> {
+        delay(2_000)
+        return messages.filter { it.chatId == chatId }.wrapInOziResponse()
     }
 
     override suspend fun getSignals(token: String): List<Signal> {
@@ -133,9 +77,8 @@ class FakeOziRemoteService : OziRemoteService {
         return listOf(signal1, signal2)
     }
 
-    override suspend fun getChats(chatId: String?, token: String): List<ChatDto> {
-        delay(2_000)
-        return chats.map { it.toChatDto() }
+    override suspend fun getUserChats(): OziResponse<List<ApiChat>> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun postToGaming(data: String, token: String): String {
@@ -157,4 +100,9 @@ class FakeOziRemoteService : OziRemoteService {
     private fun Chat.toChatDto(): ChatDto {
         return ChatDto(chatId, participantIds)
     }
+
+    private fun <T> T.wrapInOziResponse(successful: Boolean = true) =
+        Response.success(ApiResponse(successful, null, this))
+
+    private fun User.toFromApiUser() = FromApiUser(username, userId, aviFg, aviBg)
 }

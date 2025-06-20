@@ -125,7 +125,7 @@ class ProcessSignalsUseCaseImpl @Inject constructor(
         return newMessages
     }
 
-    suspend fun refreshMessages() {
+    override suspend fun refreshMessages() {
         val chats = chatRepo.getChatsFromNetwork()
         refreshAllForNewMessages(chats.map { it.chatId })
     }

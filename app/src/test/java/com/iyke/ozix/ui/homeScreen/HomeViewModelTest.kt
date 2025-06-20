@@ -47,7 +47,7 @@ class HomeViewModelTest {
             onBlocking { invoke() } doReturn flowOf(chats)
         }
 
-        homeViewModel = HomeViewModel(thisUserUseCases, deleteChatsUseCase, getChatsUseCase)
+        homeViewModel = HomeViewModel(thisUserUseCases, deleteChatsUseCase, getChatsUseCase, mock())
     }
 
     @get:Rule

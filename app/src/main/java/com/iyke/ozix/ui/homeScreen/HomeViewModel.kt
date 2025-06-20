@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iyke.ozix.domain.useCases.defaultImplementations.ProcessSignalsUseCaseImpl
+import com.iyke.ozix.domain.useCases.interfaces.ProcessSignalsUseCase
 import com.iyke.ozix.domain.useCases.interfaces.chat.DeleteChatsUseCase
 import com.iyke.ozix.domain.useCases.interfaces.chat.GetChatsUseCase
 import com.iyke.ozix.domain.useCases.interfaces.user.ThisUserUseCases
@@ -21,7 +22,7 @@ open class HomeViewModel @Inject constructor(
     private val thisUserUseCases: ThisUserUseCases,
     private val deleteChatsUseCase: DeleteChatsUseCase,
     getChatsUseCase: GetChatsUseCase,
-    processSignalsUseCaseImpl: ProcessSignalsUseCaseImpl,
+    processSignalsUseCaseImpl: ProcessSignalsUseCase,
 ) : ViewModel() {
 
     val uiState = MutableStateFlow<HomeUiState?>(null)

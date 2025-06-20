@@ -26,10 +26,10 @@
           </targets>
         </DialogSelection>
       </SelectionState>
-      <SelectionState runConfigName="LoginFlow">
+      <SelectionState runConfigName="sendMessage()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="sendMessage()">
+      <SelectionState runConfigName="Tests in 'com.iyke.ozix'">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

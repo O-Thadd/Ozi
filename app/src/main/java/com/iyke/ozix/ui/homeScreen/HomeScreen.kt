@@ -141,7 +141,7 @@ private fun HomeScreen_simple(
 
         //debug
         val ciInfoItem = MenuData(
-            name = "CI setup test 1",
+            name = "CI-CD setup test 2",
             action = { },
         )
 
