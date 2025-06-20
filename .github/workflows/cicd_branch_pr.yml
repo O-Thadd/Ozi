@@ -1,7 +1,7 @@
 name: Run test
 
 on:
-  pull_request:
+  push:
     branches: [cicd-active]
 
 jobs:
