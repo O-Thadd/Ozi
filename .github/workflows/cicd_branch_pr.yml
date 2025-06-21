@@ -1,4 +1,4 @@
-name: Run test
+name: Deploy to Google Play
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
 
 jobs:
   test:
+    name: Unit Test
     runs-on: ubuntu-latest
 
     steps:
