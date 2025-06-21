@@ -46,6 +46,9 @@ jobs:
           gradlePath: app/build.gradle
           versionCode: ${{ github.run_number }}
 
+      - name: Grant execute permissions for gradlew
+        run: chmod +x gradlew
+
       - name: Assemble Release Bundle
         run: ./gradlew bundleRelease
 
