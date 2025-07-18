@@ -48,6 +48,12 @@ android {
     }
 }
 
+tasks.withType(Test).configureEach {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
 dependencies {
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
@@ -146,4 +152,11 @@ dependencies {
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.44")
     // ...with Kotlin.
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44")
+
+    implementation "androidx.credentials:credentials:1.5.0"
+    implementation "androidx.credentials:credentials-play-services-auth:1.5.0"
+    implementation "com.google.android.libraries.identity.googleid:googleid:1.1.1"
+
+    implementation("androidx.biometric:biometric:1.1.0")
+
 }
