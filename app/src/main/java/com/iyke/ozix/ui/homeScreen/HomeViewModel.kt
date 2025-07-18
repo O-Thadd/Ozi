@@ -60,17 +60,17 @@ open class HomeViewModel @Inject constructor(
                 launch {
                     while (true) {
                         loopCount++
-                        Log.e("zzz", "loop $loopCount running...")
+//                        Log.e("zzz", "loop $loopCount running...")
                         if (!userLoggedIn) {
                             userLoggedIn = thisUserUseCases.get().first() != null
-                            Log.e("zzz", "user not logged in moving to next")
+//                            Log.e("zzz", "user not logged in moving to next")
                             delay(6000)
                             continue
                         }
 
-                        Log.e("zzz", "user logged in. refreshing...")
+//                        Log.e("zzz", "user logged in. refreshing...")
                         processSignalsUseCaseImpl.refreshMessages()
-                        Log.e("zzz", "refresh done.")
+//                        Log.e("zzz", "refresh done.")
                         delay(6000)
                     }
                 }

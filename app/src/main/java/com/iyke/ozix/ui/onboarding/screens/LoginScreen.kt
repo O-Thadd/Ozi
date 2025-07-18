@@ -29,6 +29,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,6 +46,9 @@ import com.iyke.ozix.ui.onboarding.OnBoardingOpStatus
 import com.iyke.ozix.ui.onboarding.OnBoardingViewModel
 import com.iyke.ozix.ui.theme.OziComposeTheme
 import com.iyke.ozix.R
+import com.iyke.ozix.ui.onboarding.authutils.instantiateGoogleSignInRequest
+import com.iyke.ozix.ui.onboarding.authutils.signInWithBiometrics
+import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
@@ -135,7 +139,68 @@ fun LoginScreen(
                         }
                     }
 
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    val coroutineScope = rememberCoroutineScope()
+                    FilledTonalButton(
+                        onClick = { coroutineScope.launch { instantiateGoogleSignInRequest(context) } },
+                        shape = RoundedCornerShape(8.dp),
+                        contentPadding = PaddingValues(vertical = 16.dp),
+                        colors = ButtonDefaults.filledTonalButtonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        AnimatedContent(
+                            targetState = uiState.loginOpStatus,
+                            label = "button animation"
+                        ) {
+                            if (it != OnBoardingOpStatus.BUSY) {
+                                Text(
+                                    text = "Login with Google",
+                                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp)
+                                )
+                            } else {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    FilledTonalButton(
+                        onClick = { signInWithBiometrics(context) },
+                        shape = RoundedCornerShape(8.dp),
+                        contentPadding = PaddingValues(vertical = 16.dp),
+                        colors = ButtonDefaults.filledTonalButtonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        AnimatedContent(
+                            targetState = uiState.loginOpStatus,
+                            label = "button animation"
+                        ) {
+                            if (it != OnBoardingOpStatus.BUSY) {
+                                Text(
+                                    text = "Login Biometric",
+                                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp)
+                                )
+                            } else {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
+                        }
+                    }
+
+
                     Spacer(modifier = Modifier.height(64.dp))
+
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically

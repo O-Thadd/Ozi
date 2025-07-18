@@ -174,6 +174,8 @@ fun OziApp(
                         setUiReady = setUiReady
                     ) { navController.popBackStack() }
                 }
+
+                deepLinkAppLinkTestGraph()
             }
         }
 
@@ -230,16 +232,16 @@ fun OziApp(
             }
         }
 
-//        Box(
-//            modifier = Modifier.align(Alignment.BottomEnd)
-//        ) {
-//            FilledTonalButton(
-//                onClick = mainActivityViewModel::syncAll,
-//                modifier = Modifier.align(Alignment.BottomEnd)
-//            ) {
-//                Text("Sync all")
-//            }
-//        }
+        Box(
+            modifier = Modifier.align(Alignment.BottomEnd)
+        ) {
+            FilledTonalButton(
+                onClick = { navController.navigate("linkarena") },
+                modifier = Modifier.align(Alignment.BottomEnd)
+            ) {
+                Text("go to deeplink")
+            }
+        }
     }
 
     LaunchedEffect(key1 = appIuState?.appState?.gameChatId) {
