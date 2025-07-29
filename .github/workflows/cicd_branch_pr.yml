@@ -19,6 +19,9 @@ jobs:
           java-version: 17
           cache: 'gradle'
 
+      - name: Get signing config
+        run: echo ${{ secrets.OZI_SIGNING_CONFIG }} | base64 -d > signingConfig.properties
+
       - name: Grant execute permissions for gradlew
         run: chmod +x gradlew
 
@@ -39,6 +42,9 @@ jobs:
           distribution: 'temurin'
           java-version: 17
           cache: 'gradle'
+
+      - name: Get signing config
+        run: echo ${{ secrets.OZI_SIGNING_CONFIG }} | base64 -d > signingConfig.properties
 
       - name: Get keystore
         run: echo ${{ secrets.OZI_KEYSTORE }} | base64 -d > app/keystore.jks
