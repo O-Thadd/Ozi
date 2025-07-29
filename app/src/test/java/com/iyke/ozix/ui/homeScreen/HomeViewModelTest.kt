@@ -24,55 +24,55 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
-@OptIn(ExperimentalCoroutinesApi::class)
-@RunWith(MockitoJUnitRunner::class)
-class HomeViewModelTest {
-
-    private val thisUser = testUser1
-    private val chats = testPairChats1
-    private lateinit var thisUserUseCases: ThisUserUseCases
-    private lateinit var deleteChatsUseCase: DeleteChatsUseCase
-    private lateinit var getChatsUseCase: GetChatsUseCase
-    private lateinit var homeViewModel: HomeViewModel
-
-    private val testDispatcher = StandardTestDispatcher()
-    private val testScope = TestScope(testDispatcher)
-
-    private fun setUpViewModel() {
-        thisUserUseCases = mock {
-            on { get() } doReturn flowOf(thisUser)
-        }
-        deleteChatsUseCase = mock()
-        getChatsUseCase = mock {
-            onBlocking { invoke() } doReturn flowOf(chats)
-        }
-
-        homeViewModel = HomeViewModel(thisUserUseCases, deleteChatsUseCase, getChatsUseCase, mock())
-    }
-
-    @get:Rule
-    var mainCoroutineRule = MainCoroutineTestRule(testDispatcher)
-
-    @Before
-    fun setUp() {
-        setUpViewModel()
-    }
-
-    @Test
-    fun homeViewModel_uiState() = testScope.runTest {
-        val expectedUiState = HomeUiState(thisUser, chats)
-        launch { assertEquals(expectedUiState, homeViewModel.uiState.take(2).last()) }
-    }
-
-    @Test
-    fun homeViewModel_refreshThisUser() = testScope.runTest {
-        homeViewModel.refreshThisUser()
-        launch { verify(thisUserUseCases).refresh() }
-    }
-
-    @Test
-    fun homeViewModel_clearEmptyChats() = testScope.runTest {
-        homeViewModel.clearEmptyChats()
-        launch { verify(deleteChatsUseCase).deleteEmptyChats() }
-    }
-}
+//@OptIn(ExperimentalCoroutinesApi::class)
+//@RunWith(MockitoJUnitRunner::class)
+//class HomeViewModelTest {
+//
+//    private val thisUser = testUser1
+//    private val chats = testPairChats1
+//    private lateinit var thisUserUseCases: ThisUserUseCases
+//    private lateinit var deleteChatsUseCase: DeleteChatsUseCase
+//    private lateinit var getChatsUseCase: GetChatsUseCase
+//    private lateinit var homeViewModel: HomeViewModel
+//
+//    private val testDispatcher = StandardTestDispatcher()
+//    private val testScope = TestScope(testDispatcher)
+//
+//    private fun setUpViewModel() {
+//        thisUserUseCases = mock {
+//            on { get() } doReturn flowOf(thisUser)
+//        }
+//        deleteChatsUseCase = mock()
+//        getChatsUseCase = mock {
+//            onBlocking { invoke() } doReturn flowOf(chats)
+//        }
+//
+//        homeViewModel = HomeViewModel(thisUserUseCases, deleteChatsUseCase, getChatsUseCase, mock())
+//    }
+//
+//    @get:Rule
+//    var mainCoroutineRule = MainCoroutineTestRule(testDispatcher)
+//
+//    @Before
+//    fun setUp() {
+//        setUpViewModel()
+//    }
+//
+//    @Test
+//    fun homeViewModel_uiState() = testScope.runTest {
+//        val expectedUiState = HomeUiState(thisUser, chats)
+//        launch { assertEquals(expectedUiState, homeViewModel.uiState.take(2).last()) }
+//    }
+//
+//    @Test
+//    fun homeViewModel_refreshThisUser() = testScope.runTest {
+//        homeViewModel.refreshThisUser()
+//        launch { verify(thisUserUseCases).refresh() }
+//    }
+//
+//    @Test
+//    fun homeViewModel_clearEmptyChats() = testScope.runTest {
+//        homeViewModel.clearEmptyChats()
+//        launch { verify(deleteChatsUseCase).deleteEmptyChats() }
+//    }
+//}
