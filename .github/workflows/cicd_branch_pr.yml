@@ -40,6 +40,9 @@ jobs:
           java-version: 17
           cache: 'gradle'
 
+      - name: Get keystore
+        run: echo ${{ secrets.OZI_KEYSTORE }} | base64 -d > app/keystore.jks
+
       - name: Version Bump
         uses: chkfung/android-version-actions@v1.2.3
         with:
@@ -52,14 +55,14 @@ jobs:
       - name: Assemble Release Bundle
         run: ./gradlew bundleRelease
 
-      - name: Sign Release
-        uses: r0adkll/sign-android-release@v1
-        with:
-          releaseDirectory: app/build/outputs/bundle/release
-          signingKeyBase64: ${{ secrets.OZI_KEYSTORE }}
-          keyStorePassword: ${{ secrets.OZI_KEYSTORE_PASSWORD }}
-          alias: ${{ secrets.OZI_KEYSTORE_ALIAS }}
-          keyPassword: ${{ secrets.OZI_KEYSTORE_ALIAS_PASSWORD }}
+#      - name: Sign Release
+#        uses: r0adkll/sign-android-release@v1
+#        with:
+#          releaseDirectory: app/build/outputs/bundle/release
+#          signingKeyBase64: ${{ secrets.OZI_KEYSTORE }}
+#          keyStorePassword: ${{ secrets.OZI_KEYSTORE_PASSWORD }}
+#          alias: ${{ secrets.OZI_KEYSTORE_ALIAS }}
+#          keyPassword: ${{ secrets.OZI_KEYSTORE_ALIAS_PASSWORD }}
 
       - name: Deploy bundle to Google Play
         uses: r0adkll/upload-google-play@v1.1.3
